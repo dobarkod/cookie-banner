@@ -16,7 +16,7 @@ To see the script in action, visit the [Good Code web page](http://goodcode.io/)
 Add a single line to your web page, just before the closing `</body>` tag:
 
     <script type="text/javascript" id="cookiebanner"
-        src="//cookiebanner.eu/js/cookiebanner.min.js"></script>
+        src="http://cookiebanner.eu/js/cookiebanner.min.js"></script>
 
 This will display a black-and-white floating banner at the bottom of your
 web page, informing the user that the site is using cookies, and giving them
@@ -56,8 +56,12 @@ Here's an example:
 
 ## Self-hosting
 
-If you don't want to depends on the `cookiebanner.eu` site, you can copy
+If you don't want to depend on the `cookiebanner.eu` site, you can copy
 the `cookiebanner.min.js` directly to your site.
+
+If you're using SSL, you'll also need to host the file yourself, as Amazon S3
+service that we're using for hosting doesn't support adding custom SSL
+certificates.
 
 ## Internals and more options
 

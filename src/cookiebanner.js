@@ -28,7 +28,15 @@
     }
 
     function getScriptData(key, dfl) {
-        var val = script.dataset[key];
+        var val;
+
+        if (script.hasOwnProperty('dataset')) {
+            val = script.dataset[key];
+        } else {
+            val = script.attributes['data-' + key];
+            if (val !== undefined) val = val.value;
+        }
+
         if (val === undefined) val = dfl;
         return val;
     }
@@ -53,7 +61,7 @@
 
     function show_el() {
         var el = doc.createElement('div');
-        el.class = "cookiebanner";
+        el['class'] = "cookiebanner";
         el.style.position = "fixed";
         el.style.left = 0;
         el.style.right = 0;

@@ -74,7 +74,7 @@ subtree and add it just before the closing `</body>` tag:
         <div style="float: right;">x</div>
     </div>
 
-You can use CSS with `div#cookiebanner > span` and `div#cookiebanner > a` to
+You can use CSS with `div.cookiebanner > span` and `div.cookiebanner > a` to
 further modify the banner appearance.
 
 ## Hacking

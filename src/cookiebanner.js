@@ -65,13 +65,13 @@
         el.style.position = "fixed";
         el.style.left = 0;
         el.style.right = 0;
-        el.style.height = getScriptData('height', '32px');
+        el.style.height = getScriptData('height', 'auto');
+        el.style.minHeight = getScriptData('min-height', '21px');
         el.style.zIndex = 255;
         el.style.background = getScriptData('bg', '#000');
         el.style.color = getScriptData('fg', '#ddd');
-        el.style.lineHeight = el.style.height;
-        el.style.paddingLeft = '16px';
-        el.style.paddingRight = '16px';
+        el.style.lineHeight = el.style.minHeight;
+        el.style.padding = '5px 16px';
         el.style.fontFamily = "arial, sans-serif";
         el.style.fontSize = '14px';
 
@@ -83,7 +83,7 @@
 
         el.innerHTML = '<span>' + getScriptData('message', default_text) +
             ' <a>' + getScriptData('linkmsg', default_link) + '</a></span>' +
-            '<div style="float: right;">&#10006;</div>';
+            '<div style="float: right; padding-left: 5px;">&#10006;</div>';
 
         var el_a = el.getElementsByTagName('a')[0];
         el_a.href = getScriptData('moreinfo', 'http://aboutcookies.org/');

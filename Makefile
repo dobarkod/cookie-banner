@@ -1,4 +1,4 @@
-MINIFY = uglifyjs --lint
+MINIFY = uglifyjs --lint -c -m toplevel=true
 LINT = jshint --show-non-errors
 UPLOAD = s3cmd put -P
 

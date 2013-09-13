@@ -46,6 +46,12 @@ style. The following options are settable through a `data-` property on the
 * `moreinfo` - where the visitor can read more about cookies
   (default: [http://aboutcookies.org](http://aboutcookies.org))
 
+* `mask` - whether to create a mask over the viewport (default: `false`). Clicking anywhere on the mask is considered as acceptance.
+* `mask-opacity` - the opacity to use for the window mask (default: `0.5`)
+* `mask-background` - optional background style you wish to apply to the `mask` <div> (default: `#000`)
+
+* `zindex` - z-index to set on the notice (default: `255`). If `mask` is used, the notice <div>'s z-index is automatically incremented by 1 so it appears above the mask)
+
 Here's an example:
 
     <script type="text/javascript" id="cookiebanner"
@@ -69,9 +75,9 @@ If the banner needs to be shown, the script will create the following DOM
 subtree and add it just before the closing `</body>` tag:
 
     <div class="cookiebanner">
+        <div style="float: right; padding-left:5px;">x</div>
         <span>Message</span>
-        <a href=".." target="_blank">Learn more</a>
-        <div style="float: right;">x</div>
+        <a href=".." target="_blank">Learn more</a>        
     </div>
 
 You can use CSS with `div.cookiebanner > span` and `div.cookiebanner > a` to
@@ -86,12 +92,12 @@ Get the newest and the freshest from GitHub:
 If you've modified the code, it's recommended you run it through linter
 to catch potential errors, and minifier to minimize its footprint.
 
-We're old-school here so we just use Makfile for the tasks:
+We're old-school here so we just use Makefile for the tasks:
 
     make check  # run jshint to check the code
     make # minify it
 
-You'll need `jshint` and `uglifjs` tools installed for this.
+You'll need `jshint` and `uglifyjs` tools installed for this.
 
 Pull requests are welcome! In order to get your pull-request accepted,
 please follow these simple rules:

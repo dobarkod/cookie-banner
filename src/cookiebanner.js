@@ -19,7 +19,11 @@
 
     if (script === undefined) return;
 
-    function on(el, ev, fn) { el.addEventListener(ev, fn, false); }
+    function on(el, ev, fn) {
+        var add = el.addEventListener ? 'addEventListener' : 'attachEvent',
+            pre = el.addEventListener ? '' : 'on';
+        el[add](pre + ev, fn, false);
+    }
 
     /*!
      * contentloaded.js

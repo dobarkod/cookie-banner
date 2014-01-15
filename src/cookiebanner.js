@@ -1,29 +1,11 @@
 /*global window:false*/
 
-(function() {
+(function(context) {
     'use strict';
 
-    var win = window, doc = win.document;
+    var win = context, doc = win.document;
 
-    var default_text = 'We use cookies to enhance your experience. ' +
-        'By continuing to visit this site you agree to our use of cookies.';
-
-    var default_link = 'Learn more';
-
-    var script = (function() {
-        var scripts = doc.getElementsByTagName('script');
-        for (var i = 0; i < scripts.length; i++) {
-            if (scripts[i].id == 'cookiebanner') return scripts[i];
-        }
-    })();
-
-    if (script === undefined) return;
-
-    function on(el, ev, fn) {
-        var add = el.addEventListener ? 'addEventListener' : 'attachEvent',
-            pre = el.addEventListener ? '' : 'on';
-        el[add](pre + ev, fn, false);
-    }
+    var global_instance_name = 'cbinstance';
 
     /*!
      * contentloaded.js
@@ -42,7 +24,6 @@
     // @win window reference
     // @fn function reference
     function contentLoaded(win, fn) {
-
         var done = false, top = true,
         doc = win.document, root = doc.documentElement,
 
@@ -71,9 +52,8 @@
             doc[add](pre + 'readystatechange', init, false);
             win[add](pre + 'load', init, false);
         }
-
     }
-    
+
     var Cookies = {
         get: function (key) {
             return decodeURIComponent(doc.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(key).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
@@ -101,141 +81,335 @@
         },
         has: function (key) {
             return (new RegExp('(?:^|;\\s*)' + encodeURIComponent(key).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=')).test(doc.cookie);
-        }
-        /*remove: function (key, path, domain) {
+        },
+        remove: function (key, path, domain) {
             if (!key || !this.has(key)) { return false; }
-            doc.cookie = encodeURIComponent(sKey) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? '; domain=' + domain : '') + ( path ? '; path=' + path : '');
+            doc.cookie = encodeURIComponent(key) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? '; domain=' + domain : '') + ( path ? '; path=' + path : '');
             return true;
-        },*/
+        }
     };
 
-    function get_script_data(key, dfl) {
-        var val;
+    var Utils = {
 
-        if (script.hasOwnProperty('dataset')) {
-            val = script.dataset[key];
-        } else {
-            val = script.attributes['data-' + key];
-            if (val !== undefined) val = val.value;
-        }
-
-        if (val === undefined) val = dfl;
-        return val;
-    }
-    
-    function str2bool(str) {
-        str = '' + str;
-        switch (str.toLowerCase()) {
-            case 'false':
-            case 'no':
-            case '0':
-            case '':
-                return false; 
-            default: 
-                return true;
+        // merge objects and whatnot
+        merge: function(){
+            var obj = {},
+                i = 0,
+                al = arguments.length,
+                key;
+            if (0 === al) {
+                return obj;
             }
-    }
-    
-    function fade_in(el) {
-        if (el.style.opacity < 1) {
-            el.style.opacity = (parseFloat(el.style.opacity) + 0.05).toFixed(2);
-            win.setTimeout(function(){
-                fade_in(el);
-            }, 50);
+            for (; i < al; i++) {
+                for (key in arguments[i]) {
+                    if (arguments[i].hasOwnProperty(key)) {
+                        obj[key] = arguments[i][key];
+                    }
+                }
+            }
+            return obj;
+        },
+
+        str2bool: function(str) {
+            str = '' + str;
+            switch (str.toLowerCase()) {
+                case 'false':
+                case 'no':
+                case '0':
+                case '':
+                    return false;
+                default:
+                    return true;
+                }
+        },
+
+        fade_in: function(el) {
+            if (el.style.opacity < 1) {
+                el.style.opacity = (parseFloat(el.style.opacity) + 0.05).toFixed(2);
+                win.setTimeout(function(){
+                    Utils.fade_in(el);
+                }, 50);
+            }
+        },
+
+        get_data_attribs: function(script) {
+            var data = {};
+            if (script.hasOwnProperty('dataset')) {
+                data = script.dataset;
+            } else {
+                var attribs = script.attributes;
+                var key;
+                for (key in attribs) {
+                    if (attribs.hasOwnProperty(key)) {
+                        var attr = attribs[key];
+                        if (/^data-/.test(attr.name)) {
+                            /*
+                            var camel_case = attr.name.substr(5).replace(/-(.)/g, function ($0, $1) {
+                                return $1.toUpperCase();
+                            });
+                            */
+                            var name = attr.name.substr(5);
+                            data[name] = attr.value;
+                        }
+                    }
+                }
+            }
+            return data;
+        },
+
+        find_script_by_id: function(id) {
+            var scripts = doc.getElementsByTagName('script');
+            for (var i = 0, l = scripts.length; i < l; i++) {
+                if (id === scripts[i].id) {
+                    return scripts[i];
+                }
+            }
+            return null;
         }
-    }
 
-    var cookie_name = get_script_data('cookie', 'cookiebanner-accepted');
-    var z_idx = parseInt(get_script_data('zindex', 255), 10);   
+    };
 
-    function build_viewport_mask() {
-        var create_mask = str2bool(get_script_data('mask', false));
-        var mask = null;
-        if (true === create_mask) {
-            var mask_opacity = get_script_data('mask-opacity', 0.5);
-            var bg = get_script_data('mask-background', '#000');
-            var mask_markup = '<div id="cookiebanner-mask" style="' +
-                'position:fixed;top:0;left:0;width:100%;height:100%;' + 
-                'background:' + bg + ';zoom:1;filter:alpha(opacity=' + 
-                (mask_opacity * 100) +');opacity:' + mask_opacity +';' +
-                'z-index:' + z_idx +';"></div>';
+
+    var Cookiebanner = context.Cookiebanner = function(opts) {
+        this.init(opts);
+    };
+
+    Cookiebanner.prototype = {
+
+        // for testing stuff from the outside mostly
+        cookiejar: Cookies,
+
+        init: function(opts) {
+
+            this.inserted = false;
+            this.closed = false;
+            this.test_mode = false; // TODO: implement
+
+            var default_text = 'We use cookies to enhance your experience. ' +
+                'By continuing to visit this site you agree to our use of cookies.';
+            var default_link = 'Learn more';
+
+            this.default_options = {
+                // autorun: true,
+                cookie: 'cookiebanner-accepted',
+                debug: false,
+                'cookie-path': '/',
+                expires: Infinity,
+                zindex: 255,
+                mask: false,
+                'mask-opacity': 0.5,
+                'mask-background': '#000',
+                height: 'auto',
+                'min-height': '21px',
+                bg: '#000',
+                fg: '#ddd',
+                link: '#aaa',
+                position: 'bottom',
+                message: default_text,
+                linkmsg: default_link,
+                moreinfo: 'http://aboucookies.org',
+                effect: null,
+                instance: global_instance_name
+            };
+
+            this.options = this.default_options;
+            this.script_el = Utils.find_script_by_id('cookiebanner');
+
+            if (this.script_el) {
+                var data_options = Utils.get_data_attribs(this.script_el);
+                this.options = Utils.merge(this.options, data_options);
+            }
+
+            // allowing opts passed to the ctor to override everything
+            if (opts) {
+                this.options = Utils.merge(this.options, opts);
+            }
+
+            // allows customizing the global instance name via options too
+            global_instance_name = this.options.instance;
+
+            // TODO: parse/validate other options that can benefit
+            this.options.zindex = parseInt(this.options.zindex, 10);
+            this.options.mask = Utils.str2bool(this.options.mask);
+
+            // check for a possible global callback specified as a string
+            if ('string' === typeof this.options.expires) {
+                if ('function' === typeof context[this.options.expires]) {
+                    this.options.expires = context[this.options.expires];
+                }
+            }
+
+            // check if expires is a callback
+            if ('function' === typeof this.options.expires) {
+                // TODO: this might not always be as simple as this
+                this.options.expires = this.options.expires();
+            }
+
+            // Proceed with our plans only if we're invoked via a <script> element
+            // that has the required id attribute.
+            // For manually created instances one must call run() explicitly.
+            if (this.script_el) {
+                this.run();
+            }
+        },
+
+        log: function(){
+            if ('undefined' !== typeof console) {
+                console.log.apply(console, arguments);
+            }
+        },
+
+        run: function() {
+            if (!this.agreed()) {
+                var self = this;
+                contentLoaded(win, function(){
+                    self.insert();
+                });
+            }
+        },
+
+        build_viewport_mask: function() {
+            var mask = null;
+            if (true === this.options.mask) {
+                var mask_opacity = this.options['mask-opacity'];
+                var bg = this.options['mask-background'];
+                var mask_markup = '<div id="cookiebanner-mask" style="' +
+                    'position:fixed;top:0;left:0;width:100%;height:100%;' +
+                    'background:' + bg + ';zoom:1;filter:alpha(opacity=' +
+                    (mask_opacity * 100) +');opacity:' + mask_opacity +';' +
+                    'z-index:' + this.options.zindex +';"></div>';
+                var el = doc.createElement('div');
+                el.innerHTML = mask_markup;
+                mask = el.firstChild;
+            }
+            return mask;
+        },
+
+        agree: function() {
+            this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options['cookie-path']);
+            return true;
+        },
+
+        agreed: function(){
+            return this.cookiejar.has(this.options.cookie);
+        },
+
+        close: function() {
+            if (this.inserted) {
+                if (!this.closed) {
+                    if (this.element) {
+                        doc.body.removeChild(this.element);
+                    }
+                    if (this.element_mask) {
+                        doc.body.removeChild(this.element_mask);
+                    }
+                    this.closed = true;
+                }
+            }/* else {
+                throw new Error("Not inserted but closing?!");
+            }*/
+            return this.closed;
+        },
+
+        agree_and_close:function() {
+            this.agree();
+            return this.close();
+        },
+
+        // close and remove every trace of ourselves completely
+        cleanup: function() {
+            this.close();
+            return this.unload();
+        },
+
+        unload: function() {
+            if (this.script_el) {
+                this.script_el.parentNode.removeChild(this.script_el);
+            }
+            context[global_instance_name] = undefined;
+            // delete context[global_instance_name];
+            return true;
+        },
+
+        insert: function() {
+            this.element_mask = this.build_viewport_mask();
+
+            var zidx = this.options.zindex;
+
+            if (this.element_mask) {
+                // bump notice element's zindex so it's above the mask
+                zidx += 1;
+            }
+
             var el = doc.createElement('div');
-            el.innerHTML = mask_markup;
-            mask = el.firstChild;
-        }
-        return mask;
-    }
+            el.className = 'cookiebanner';
+            el.style.position = 'fixed';
+            el.style.left = 0;
+            el.style.right = 0;
+            el.style.height = this.options.height;
+            el.style.minHeight = this.options['min-height'];
+            el.style.zIndex = zidx;
+            el.style.background = this.options.bg;
+            el.style.color = this.options.fg;
+            el.style.lineHeight = el.style.minHeight;
 
-    function inject_notice() {
+            el.style.padding = '5px 16px';
+            // TODO: allow typography customizations via data-attribs?
+            el.style.fontFamily = 'arial, sans-serif';
+            el.style.fontSize = '14px';
 
-        var mask = build_viewport_mask();
-        if (mask) {
-            // bump notice element's z-index so it's above the mask
-            z_idx += 1;
-        }
+            if ('top' === this.options.position) {
+                el.style.top = 0;
+            } else {
+                el.style.bottom = 0;
+            }
 
-        var el = doc.createElement('div');
-        el.className = 'cookiebanner';
-        el.style.position = 'fixed';
-        el.style.left = 0;
-        el.style.right = 0;
-        el.style.height = get_script_data('height', 'auto');
-        el.style.minHeight = get_script_data('min-height', '21px');
-        el.style.zIndex = z_idx;
-        el.style.background = get_script_data('bg', '#000');
-        el.style.color = get_script_data('fg', '#ddd');
-        el.style.lineHeight = el.style.minHeight;
-        el.style.padding = '5px 16px';
-        el.style.fontFamily = 'arial, sans-serif';
-        el.style.fontSize = '14px';
+            el.innerHTML = '<div style="float:right;padding-left:5px;">&#10006;</div>' +
+                '<span>' + this.options.message +
+                ' <a>' + this.options.linkmsg + '</a></span>';
 
-        if (get_script_data('position', 'bottom') == 'top') {
-            el.style.top = 0;
-        } else {
-            el.style.bottom = 0;
-        }
+            this.element = el;
 
-        el.innerHTML = '<div style="float:right;padding-left:5px;">&#10006;</div>' +
-            '<span>' + get_script_data('message', default_text) +
-            ' <a>' + get_script_data('linkmsg', default_link) + '</a></span>';
+            var el_a = el.getElementsByTagName('a')[0];
+            el_a.href = this.options.moreinfo;
+            el_a.target = '_blank';
+            el_a.style.textDecoration = 'none';
+            el_a.style.color = this.options.link;
 
-        var el_a = el.getElementsByTagName('a')[0];
-        el_a.href = get_script_data('moreinfo', 'http://aboutcookies.org/');
-        el_a.target = '_blank';
-        el_a.style.textDecoration = 'none';
-        el_a.style.color = get_script_data('link', '#aaa');
+            var el_x = el.getElementsByTagName('div')[0];
+            el_x.style.cursor = 'pointer';
 
-        var el_x = el.getElementsByTagName('div')[0];
-        el_x.style.cursor = 'pointer';
-        
-        function agree() {
-            Cookies.set(cookie_name, 1, Infinity, '/');
-            doc.body.removeChild(el);
-            if (mask) {
-                doc.body.removeChild(mask);
+            function on(el, ev, fn) {
+                var add = el.addEventListener ? 'addEventListener' : 'attachEvent',
+                    pre = el.addEventListener ? '' : 'on';
+                el[add](pre + ev, fn, false);
+            }
+
+            var self = this;
+            on(el_x, 'click', function(){
+                self.agree_and_close();
+            });
+
+            if (this.element_mask) {
+                on(this.element_mask, 'click', function(){
+                    self.agree_and_close();
+                });
+                doc.body.appendChild(this.element_mask);
+            }
+
+            doc.body.appendChild(this.element);
+            this.inserted = true;
+
+            if ('fade' === this.options.effect) {
+                this.element.style.opacity = 0;
+                Utils.fade_in(this.element);
+            } else {
+                this.element.style.opacity = 1;
             }
         }
-        
-        on(el_x, 'click', agree);
 
-        if (mask) {
-            on(mask, 'click', agree);
-            doc.body.appendChild(mask);
-        }
+    };
 
-        doc.body.appendChild(el);
-        
-        if (get_script_data('effect') == 'fade') {
-            el.style.opacity = 0;
-            fade_in(el);
-        } else {
-            el.style.opacity = 1;
-        }
+    context[global_instance_name] = new Cookiebanner();
 
-    }
-
-    if (!Cookies.has(cookie_name)) {
-        contentLoaded(win, inject_notice);
-    }
-
-})();
+})(window);

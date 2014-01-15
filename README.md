@@ -40,16 +40,15 @@ style. The following options are settable through a `data-` property on the
 * `message` - the message text
 * `linkmsg` - the link text content (default: `Learn more`)
 * `effect` - effect to use
-
 * `cookie` - name for the cookie to store the cookiebanner acceptance
   information (default: `cookiebanner-accepted`)
+* `expires` - cookie expiry date/time (defaults to `Infinity` aka `Fri, 31 Dec 9999 23:59:59 GMT`). There's basic support for specifying a callback function (more flexibility, must return one of `Number`, `String`, or `Date` -- see `Cookies.set()`). You can also just specify a valid UTC string.
+* `cookie-path` - Path to set for the cookie
 * `moreinfo` - where the visitor can read more about cookies
   (default: [http://aboutcookies.org](http://aboutcookies.org))
-
 * `mask` - whether to create a mask over the viewport (default: `false`). Clicking anywhere on the mask is considered as acceptance.
 * `mask-opacity` - the opacity to use for the window mask (default: `0.5`)
 * `mask-background` - optional background style you wish to apply to the `mask` <div> (default: `#000`)
-
 * `zindex` - z-index to set on the notice (default: `255`). If `mask` is used, the notice <div>'s z-index is automatically incremented by 1 so it appears above the mask)
 
 Here's an example:
@@ -77,7 +76,7 @@ subtree and add it just before the closing `</body>` tag:
     <div class="cookiebanner">
         <div style="float: right; padding-left:5px;">x</div>
         <span>Message</span>
-        <a href=".." target="_blank">Learn more</a>        
+        <a href=".." target="_blank">Learn more</a>
     </div>
 
 You can use CSS with `div.cookiebanner > span` and `div.cookiebanner > a` to

@@ -207,7 +207,7 @@
                 position: 'bottom',
                 message: default_text,
                 linkmsg: default_link,
-                moreinfo: 'http://aboucookies.org',
+                moreinfo: 'http://aboutcookies.org',
                 effect: null,
                 instance: global_instance_name
             };

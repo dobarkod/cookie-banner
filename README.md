@@ -40,6 +40,8 @@ style. The following options are settable through a `data-` property on the
 * `message` - the message text
 * `linkmsg` - the link text content (default: `Learn more`)
 * `close-text` - the text/symbol for the close button (default: `&#10006;`)
+* `font-size` - the text size of the message and the link (default: `14px`)
+* `font-family` - the font family of the message and the link (default: `arial, sans-serif`)
 * `effect` - effect to use
 * `cookie` - name for the cookie to store the cookiebanner acceptance
   information (default: `cookiebanner-accepted`)

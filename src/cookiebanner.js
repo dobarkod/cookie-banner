@@ -238,6 +238,8 @@
                 linkmsg: default_link,
                 moreinfo: 'http://aboutcookies.org',
                 effect: null,
+                fontSize: '14px',
+                fontFamily: 'arial, sans-serif',
                 instance: global_instance_name
             };
 
@@ -386,9 +388,9 @@
             el.style.lineHeight = el.style.minHeight;
 
             el.style.padding = '5px 16px';
-            // TODO: allow typography customizations via data-attribs?
-            el.style.fontFamily = 'arial, sans-serif';
-            el.style.fontSize = '14px';
+
+            el.style.fontFamily = this.options.fontFamily;
+            el.style.fontSize = this.options.fontSize;
 
             if ('top' === this.options.position) {
                 el.style.top = 0;

@@ -122,7 +122,9 @@ QUnit.test('Options override / merge', function(assert) {
         linkmsg: 'Testing',
         message: 'Lorem ipsum dolor sit amet...',
         position: 'top',
-        effect: 'fade'
+        effect: 'fade',
+        'close-text': 'Custom close text',
+        'cookie-path': '/non-existing-path/'
     };
     var banner = new Cookiebanner(opts);
 
@@ -159,10 +161,7 @@ QUnit.test('Inserted automatically if called via <script id="cookiebanner"> + cl
 QUnit.test('Not inserted automatically unless called with <script id="cookiebanner"...>', function(assert){
     stop();
     inject_script(script_src, 'different-on-purpose', {}, 'head', function(){
-        assert.ok(window.cbinstance, 'script loaded and window.cbinstance is truthy');
-        assert.ok(!window.cbinstance.inserted, 'window.cbinstance.inserted != true');
-        window.cbinstance.cleanup();
-        assert.strictEqual(undefined, window.cbinstance, 'global window.cbinstance is undefined (meaning cleanup() was successfull)');
+        assert.strictEqual(undefined, window.cbinstance, 'script loaded and window.cbinstance is undefined (meaning we did not instantiate and inject automatically)');
         start();
     });
     remove_el('different-on-purpose');
@@ -183,10 +182,11 @@ if (not_supported) {
     QUnit.test('Called automatically but should not be inserted in the DOM as the cookie should already exist', function(assert){
         var opts = {
             cookie: 'accepted-already',
-            expires: 600
+            expires: 600,
+            'cookie-path': '/',
+            'close-text': 'noooo!'
         };
         Cookies.set(opts.cookie, 1, opts.expires, opts['cookie-path']);
-
         stop();
         // now testing the actual scenario
         inject_script(script_src, 'cookiebanner', opts, 'body', function(){

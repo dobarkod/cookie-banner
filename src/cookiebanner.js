@@ -143,18 +143,27 @@
                     if (attribs.hasOwnProperty(key)) {
                         var attr = attribs[key];
                         if (/^data-/.test(attr.name)) {
-                            /*
-                            var camel_case = attr.name.substr(5).replace(/-(.)/g, function ($0, $1) {
-                                return $1.toUpperCase();
-                            });
-                            */
-                            var name = attr.name.substr(5);
-                            data[name] = attr.value;
+                            var camelized = Utils.camelize(attr.name.substr(5));
+                            data[camelized] = attr.value;
                         }
                     }
                 }
             }
             return data;
+        },
+
+        camelize: function(str) {
+            var separator = '-',
+                match = str.indexOf(separator);
+            while (match != -1) {
+                var last = (match === (str.length - 1)),
+                    next = last ? '' : str[match+1],
+                    upnext = next.toUpperCase(),
+                    sep_substr =  last ? separator : separator + next;
+                str = str.replace(sep_substr, upnext)
+                match = str.indexOf(separator);
+            }
+            return str;
         },
 
         find_script_by_id: function(id) {
@@ -169,6 +178,7 @@
 
     };
 
+    var script_el_invoker = Utils.find_script_by_id('cookiebanner');
 
     var Cookiebanner = context.Cookiebanner = function(opts) {
         this.init(opts);
@@ -192,15 +202,16 @@
             this.default_options = {
                 // autorun: true,
                 cookie: 'cookiebanner-accepted',
+                closeText: '&#10006;',
+                cookiePath: '/',
                 debug: false,
-                'cookie-path': '/',
                 expires: Infinity,
                 zindex: 255,
                 mask: false,
-                'mask-opacity': 0.5,
-                'mask-background': '#000',
+                maskOpacity: 0.5,
+                maskBackground: '#000',
                 height: 'auto',
-                'min-height': '21px',
+                minHeight: '21px',
                 bg: '#000',
                 fg: '#ddd',
                 link: '#aaa',
@@ -213,7 +224,7 @@
             };
 
             this.options = this.default_options;
-            this.script_el = Utils.find_script_by_id('cookiebanner');
+            this.script_el = script_el_invoker;
 
             if (this.script_el) {
                 var data_options = Utils.get_data_attribs(this.script_el);
@@ -271,8 +282,8 @@
         build_viewport_mask: function() {
             var mask = null;
             if (true === this.options.mask) {
-                var mask_opacity = this.options['mask-opacity'];
-                var bg = this.options['mask-background'];
+                var mask_opacity = this.options.maskOpacity;
+                var bg = this.options.maskBackground;
                 var mask_markup = '<div id="cookiebanner-mask" style="' +
                     'position:fixed;top:0;left:0;width:100%;height:100%;' +
                     'background:' + bg + ';zoom:1;filter:alpha(opacity=' +
@@ -286,7 +297,7 @@
         },
 
         agree: function() {
-            this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options['cookie-path']);
+            this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath);
             return true;
         },
 
@@ -347,7 +358,7 @@
             el.style.left = 0;
             el.style.right = 0;
             el.style.height = this.options.height;
-            el.style.minHeight = this.options['min-height'];
+            el.style.minHeight = this.options.minHeight;
             el.style.zIndex = zidx;
             el.style.background = this.options.bg;
             el.style.color = this.options.fg;
@@ -364,9 +375,9 @@
                 el.style.bottom = 0;
             }
 
-            el.innerHTML = '<div style="float:right;padding-left:5px;">&#10006;</div>' +
-                '<span>' + this.options.message +
-                ' <a>' + this.options.linkmsg + '</a></span>';
+            el.innerHTML = '<div class="cookiebanner-close" style="float:right;padding-left:5px;">' +
+                this.options.closeText + '</div>' +
+                '<span>' + this.options.message + ' <a>' + this.options.linkmsg + '</a></span>';
 
             this.element = el;
 
@@ -410,6 +421,10 @@
 
     };
 
-    context[global_instance_name] = new Cookiebanner();
+    if (script_el_invoker) {
+        if (!context[global_instance_name]) {
+            context[global_instance_name] = new Cookiebanner();
+        }
+    }
 
 })(window);

@@ -39,6 +39,7 @@ style. The following options are settable through a `data-` property on the
 * `position` - banner position, `top` or `bottom` (default: `bottom`)
 * `message` - the message text
 * `linkmsg` - the link text content (default: `Learn more`)
+* `close-text` - the text/symbol for the close button (default: `&#10006;`)
 * `effect` - effect to use
 * `cookie` - name for the cookie to store the cookiebanner acceptance
   information (default: `cookiebanner-accepted`)
@@ -74,13 +75,16 @@ If the banner needs to be shown, the script will create the following DOM
 subtree and add it just before the closing `</body>` tag:
 
     <div class="cookiebanner">
-        <div style="float: right; padding-left:5px;">x</div>
+        <div class="cookiebanner-close" style="float: right; padding-left:5px;">x</div>
         <span>Message</span>
         <a href=".." target="_blank">Learn more</a>
     </div>
 
 You can use CSS with `div.cookiebanner > span` and `div.cookiebanner > a` to
 further modify the banner appearance.
+
+You can also try customizing the close button via the `.cookiebanner-close` CSS class.
+Keep in mind that you might have to override and/or reset certain properties by using `!important` CSS rules.
 
 ## Hacking
 

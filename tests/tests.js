@@ -100,8 +100,6 @@ var Cookies = {
 };
 
 
-inject_script(script_src, 'misc-tests');
-
 QUnit.module('Basics');
 
 QUnit.test('Default options', function(assert) {
@@ -109,22 +107,27 @@ QUnit.test('Default options', function(assert) {
     assert.deepEqual(this.banner.default_options, this.banner.options, 'Default options equal effective options');
 });
 
-QUnit.test('Options override / merge', function(assert) {
+QUnit.test('Options override / merge / normalization', function(assert) {
     window.expires_callback = function(){
         return 300;
     };
     var opts = {
         // simulates a `<script data-expires="expires_callback"...>` situation
         expires: 'expires_callback',
+        closeText: 'Custom close text',
         cookie: 'testname',
-        'zindex': 10,
+        cookiePath: '/non-existing-path/',
+        zindex: 10,
         mask: true,
         linkmsg: 'Testing',
         message: 'Lorem ipsum dolor sit amet...',
         position: 'top',
         effect: 'fade',
-        'close-text': 'Custom close text',
-        'cookie-path': '/non-existing-path/'
+        'dashed-option-name': 'Something',
+        camelCasedWinsOverDashed: 'winning',
+        'camel-cased-wins-over-dashed': 'loosing',
+        'camel-cased-wins-over-dashed-regardless-of-order': 'loosing',
+        camelCasedWinsOverDashedRegardlessOfOrder: 'winning',
     };
     var banner = new Cookiebanner(opts);
 
@@ -132,14 +135,16 @@ QUnit.test('Options override / merge', function(assert) {
 
     for (var opt in opts) {
         if (opts.hasOwnProperty(opt)) {
-            assert.notEqual(opts[opt], banner.default_options[opt], 'option: `' + opt + '` value != default value');
-            assert.equal(opts[opt], banner.options[opt], 'option: `' + opt + '` value == effective option value');
+            assert.notEqual(opts[opt], banner.default_options[opt], 'option: `' + opt + '` properly overrides any potential default value');
         }
     }
+
+    assert.strictEqual(banner.options.dashedOptionName, opts['dashed-option-name'], 'dashed-option-name properly camelCased to dashedOptionName');
+    assert.strictEqual(banner.options['dashed-option-name'], undefined, 'dashed-option-name not present in banner.options');
+    assert.strictEqual(banner.options.camelCasedWinsOverDashed, 'winning', 'option specified as camelCased wins over the dashed version');
+    assert.strictEqual(banner.options.camelCasedWinsOverDashedRegardlessOfOrder, 'winning', 'option specified as camelCased wins regardless of which was specified "first"');
     window.expires_callback = undefined;
 });
-
-remove_el('misc-tests');
 
 
 QUnit.module('Invocations', {

@@ -6,7 +6,7 @@ UPLOAD = s3cmd put -P
 
 all: src/cookiebanner.min.js
 
-check: src/cookiebanner.js
+lint: src/cookiebanner.js
 	$(LINT) $<
 
 src/cookiebanner.min.js: src/cookiebanner.js
@@ -17,3 +17,7 @@ clean:
 
 publish: src/cookiebanner.min.js
 	$(UPLOAD) src/cookiebanner.min.js s3://cookiebanner.eu/js/cookiebanner.min.js
+
+test:
+	$(MAKE) lint
+	phantomjs ./tests/runner.js ./tests/tests.html

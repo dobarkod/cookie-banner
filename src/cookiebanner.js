@@ -1,4 +1,4 @@
-/*global window:false*/
+/*global window:false, setTimeout:true, console:true */
 
 (function(context) {
     'use strict';
@@ -152,15 +152,33 @@
             return data;
         },
 
+        /**
+        * "Standardizes" the options keys by converting and removing
+        * any potential "dashed-property-name" into "dashedPropertyName".
+        * In case both are present, the dashedPropertyName wins.
+        */
+        normalize_keys: function(options_object) {
+            var camelized = {};
+            for (var key in options_object) {
+                if (options_object.hasOwnProperty(key)) {
+                    var camelized_key = Utils.camelize(key);
+                    // TODO: could this break for "falsy" values within options_object?
+                    // avoiding "dashed-property-name" overriding a potentially existing "dashedPropertyName"
+                    camelized[camelized_key] = options_object[camelized_key] ? options_object[camelized_key] : options_object[key];
+                }
+            }
+            return camelized;
+        },
+
         camelize: function(str) {
             var separator = '-',
                 match = str.indexOf(separator);
             while (match != -1) {
                 var last = (match === (str.length - 1)),
-                    next = last ? '' : str[match+1],
+                    next = last ? '' : str[match + 1],
                     upnext = next.toUpperCase(),
                     sep_substr =  last ? separator : separator + next;
-                str = str.replace(sep_substr, upnext)
+                str = str.replace(sep_substr, upnext);
                 match = str.indexOf(separator);
             }
             return str;
@@ -233,6 +251,9 @@
 
             // allowing opts passed to the ctor to override everything
             if (opts) {
+                // mimics the "data-option-name" HTML attribute becoming
+                // this.options.optionName
+                opts = Utils.normalize_keys(opts);
                 this.options = Utils.merge(this.options, opts);
             }
 

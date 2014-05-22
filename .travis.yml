@@ -1,0 +1,4 @@
+before_script:
+    - npm install jshint
+script:
+    - make test

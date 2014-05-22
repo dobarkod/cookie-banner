@@ -1,4 +1,4 @@
-/*global window:false*/
+/*global window:false, setTimeout:true, console:true */
 
 (function(context) {
     'use strict';
@@ -160,7 +160,7 @@
                     next = last ? '' : str[match+1],
                     upnext = next.toUpperCase(),
                     sep_substr =  last ? separator : separator + next;
-                str = str.replace(sep_substr, upnext)
+                str = str.replace(sep_substr, upnext);
                 match = str.indexOf(separator);
             }
             return str;

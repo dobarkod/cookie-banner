@@ -102,7 +102,7 @@
             }
             for (; i < al; i++) {
                 for (key in arguments[i]) {
-                    if (arguments[i].hasOwnProperty(key)) {
+                    if (Object.prototype.hasOwnProperty.call(arguments[i], key)) {
                         obj[key] = arguments[i][key];
                     }
                 }
@@ -134,13 +134,13 @@
 
         get_data_attribs: function(script) {
             var data = {};
-            if (script.hasOwnProperty('dataset')) {
+            if (Object.prototype.hasOwnProperty.call(script, 'dataset')) {
                 data = script.dataset;
             } else {
                 var attribs = script.attributes;
                 var key;
                 for (key in attribs) {
-                    if (attribs.hasOwnProperty(key)) {
+                    if (Object.prototype.hasOwnProperty.call(attribs, key)) {
                         var attr = attribs[key];
                         if (/^data-/.test(attr.name)) {
                             var camelized = Utils.camelize(attr.name.substr(5));
@@ -160,7 +160,7 @@
         normalize_keys: function(options_object) {
             var camelized = {};
             for (var key in options_object) {
-                if (options_object.hasOwnProperty(key)) {
+                if (Object.prototype.hasOwnProperty.call(options_object, key)) {
                     var camelized_key = Utils.camelize(key);
                     // TODO: could this break for "falsy" values within options_object?
                     // avoiding "dashed-property-name" overriding a potentially existing "dashedPropertyName"

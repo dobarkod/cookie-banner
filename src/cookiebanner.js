@@ -240,7 +240,8 @@
                 effect: null,
                 fontSize: '14px',
                 fontFamily: 'arial, sans-serif',
-                instance: global_instance_name
+                instance: global_instance_name,
+                textAlign: 'center'
             };
 
             this.options = this.default_options;
@@ -391,6 +392,7 @@
 
             el.style.fontFamily = this.options.fontFamily;
             el.style.fontSize = this.options.fontSize;
+            el.style.textAlign = this.options.textAlign;
 
             if ('top' === this.options.position) {
                 el.style.top = 0;

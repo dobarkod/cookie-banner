@@ -42,6 +42,7 @@ style. The following options are settable through a `data-` property on the
 * `close-text` - the text/symbol for the close button (default: `&#10006;`)
 * `font-size` - the text size of the message and the link (default: `14px`)
 * `font-family` - the font family of the message and the link (default: `arial, sans-serif`)
+* `text-align` - The position of the text (default: `center`)
 * `effect` - effect to use
 * `cookie` - name for the cookie to store the cookiebanner acceptance
   information (default: `cookiebanner-accepted`)

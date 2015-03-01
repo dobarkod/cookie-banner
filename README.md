@@ -58,7 +58,7 @@ style. The following options are settable through a `data-` property on the
 Here's an example:
 
     <script type="text/javascript" id="cookiebanner"
-        src="//cookiebanner.eu/js/cookiebanner.js"
+        src="//cookiebanner.eu/js/cookiebanner.min.js"
         data-height="20px" data-position="top"
         data-message="We use cookies to improve your browsing experience.">
     </script>

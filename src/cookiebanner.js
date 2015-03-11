@@ -332,10 +332,10 @@
             if (this.inserted) {
                 if (!this.closed) {
                     if (this.element) {
-                        doc.body.removeChild(this.element);
+                        this.element.parentNode.removeChild(this.element);
                     }
                     if (this.element_mask) {
-                        doc.body.removeChild(this.element_mask);
+                        this.element_mask.parentNode.removeChild(this.element_mask);
                     }
                     this.closed = true;
                 }

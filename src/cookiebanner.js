@@ -241,7 +241,8 @@
                 fontSize: '14px',
                 fontFamily: 'arial, sans-serif',
                 instance: global_instance_name,
-                textAlign: 'center'
+                textAlign: 'center',
+                acceptOnScroll: false
             };
 
             this.options = this.default_options;
@@ -431,6 +432,13 @@
                     self.agree_and_close();
                 });
                 doc.body.appendChild(this.element_mask);
+            }
+
+            // Agree and close banner on window scroll if `acceptOnScroll` option is set `true`
+            if (this.options.acceptOnScroll) {
+              on(window, 'scroll', function(){
+                self.agree_and_close();
+              });
             }
 
             doc.body.appendChild(this.element);

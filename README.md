@@ -101,15 +101,17 @@ to catch potential errors, and minifier to minimize its footprint.
 
 We're old-school here so we just use Makefile for the tasks:
 
-    make check  # run jshint to check the code
+    make lint  # run jshint to check the code
+    make test  # run the tests
     make # minify it
 
-You'll need `jshint` and `uglifyjs` tools installed for this.
+You'll need `jshint` and `uglifyjs` tools installed for this, and also
+`phantomjs` if you want to run the tests.
 
 Pull requests are welcome! In order to get your pull-request accepted,
 please follow these simple rules:
 
-* all code submissions must pass cleanly (no errors) with `make check`
+* all code submissions must pass cleanly (no errors) with `make test`
 * there should be no external JavaScript, CSS, image files or any other
   dependencies
 * the code should work with no errors or warnings on recent Chrome, Firefox,

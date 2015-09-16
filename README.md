@@ -55,6 +55,7 @@ style. The following options are settable through a `data-` property on the
 * `mask-background` - optional background style you wish to apply to the `mask` <div> (default: `#000`)
 * `zindex` - z-index to set on the notice (default: `255`). If `mask` is used, the notice <div>'s z-index is automatically incremented by 1 so it appears above the mask)
 * `accept-on-scroll` - when is set `true` window scrolling is considered as acceptance. (default: `false`)
+* `domain` - explicitly set domain for cookie. Set to `example.com` to require acceptance once for all subdomains of `example.com` (`*.example.com`)
 
 Here's an example:
 

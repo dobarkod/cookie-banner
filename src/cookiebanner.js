@@ -263,7 +263,8 @@ THE SOFTWARE.
                 fontFamily: 'arial, sans-serif',
                 instance: global_instance_name,
                 textAlign: 'center',
-                acceptOnScroll: false
+                acceptOnScroll: false,
+                domain: null
             };
 
             this.options = this.default_options;
@@ -343,7 +344,7 @@ THE SOFTWARE.
         },
 
         agree: function() {
-            this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath);
+            this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath, this.options.domain);
             return true;
         },
 

@@ -32,7 +32,7 @@ If you don't like the defaults, you can modify the banner content and
 style. The following options are settable through a `data-` property on the
 `script` tag:
 
-* `height` - banner height (default: 32 pixels)
+* `height` - banner height (default: `32px`)
 * `fg` - banner text color (default: `#ddd`)
 * `bg` - banner background color (default: `#000`)
 * `link` - link text color (default: `#aaa`)

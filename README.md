@@ -40,6 +40,7 @@ style. The following options are settable through a `data-` property on the
 * `message` - the message text
 * `linkmsg` - the link text content (default: `Learn more`)
 * `close-text` - the text/symbol for the close button (default: `&#10006;`)
+* `close-style` - custom style for .cookiebanner-close (default: `float:right;padding-left:5px;`)
 * `font-size` - the text size of the message and the link (default: `14px`)
 * `font-family` - the font family of the message and the link (default: `arial, sans-serif`)
 * `text-align` - The position of the text (default: `center`)

@@ -242,6 +242,7 @@ THE SOFTWARE.
                 // autorun: true,
                 cookie: 'cookiebanner-accepted',
                 closeText: '&#10006;',
+                closeStyle: 'float:right;padding-left:5px;',
                 cookiePath: '/',
                 debug: false,
                 expires: Infinity,
@@ -423,7 +424,7 @@ THE SOFTWARE.
                 el.style.bottom = 0;
             }
 
-            el.innerHTML = '<div class="cookiebanner-close" style="float:right;padding-left:5px;">' +
+            el.innerHTML = '<div class="cookiebanner-close" style="' + this.options.closeStyle + '">' +
                 this.options.closeText + '</div>' +
                 '<span>' + this.options.message + ' <a>' + this.options.linkmsg + '</a></span>';
 

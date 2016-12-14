@@ -40,6 +40,7 @@ style. The following options are settable through a `data-` property on the
 * `message` - the message text
 * `linkmsg` - the link text content (default: `Learn more`)
 * `close-text` - the text/symbol for the close button (default: `&#10006;`)
+* `close-style` - custom style for .cookiebanner-close (default: `float:right;padding-left:5px;`)
 * `font-size` - the text size of the message and the link (default: `14px`)
 * `font-family` - the font family of the message and the link (default: `arial, sans-serif`)
 * `text-align` - The position of the text (default: `center`)
@@ -48,8 +49,10 @@ style. The following options are settable through a `data-` property on the
   information (default: `cookiebanner-accepted`)
 * `expires` - cookie expiry date/time (defaults to `Infinity` aka `Fri, 31 Dec 9999 23:59:59 GMT`). There's basic support for specifying a callback function (more flexibility, must return one of `Number`, `String`, or `Date` -- see `Cookies.set()`). You can also just specify a valid UTC string.
 * `cookie-path` - Path to set for the cookie
+* `cookie-domain` - Set a custom cookie domain (default: null)
 * `moreinfo` - where the visitor can read more about cookies
   (default: [http://aboutcookies.org](http://aboutcookies.org))
+* `moreinfo-target` - Set a custom target for moreinfo link (default: `_blank`)
 * `mask` - whether to create a mask over the viewport (default: `false`). Clicking anywhere on the mask is considered as acceptance.
 * `mask-opacity` - the opacity to use for the window mask (default: `0.5`)
 * `mask-background` - optional background style you wish to apply to the `mask` <div> (default: `#000`)

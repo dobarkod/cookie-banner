@@ -269,7 +269,8 @@ THE SOFTWARE.
                 textAlign: 'center',
                 acceptOnScroll: false,
                 acceptOnClick: false,
-		acceptOnTimeout: null
+		acceptOnTimeout: null,
+		acceptOnFirstVisit: false
             };
 
             this.options = this.default_options;
@@ -481,6 +482,11 @@ THE SOFTWARE.
 	      if(!isNaN(parseFloat(this.options.acceptOnTimeout)) && isFinite(this.options.acceptOnTimeout)) {
 	        setTimeout(function() { self.agree_and_close(); }, this.options.acceptOnTimeout);
 	      }
+            }
+		
+            // Agree on first time the user visits a page (but do not close the cookiebanner window)
+            if (this.options.acceptOnFirstVisit) {
+              self.agree();
             }
             
             doc.body.appendChild(this.element);

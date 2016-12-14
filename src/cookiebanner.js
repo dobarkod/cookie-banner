@@ -267,7 +267,8 @@ THE SOFTWARE.
                 instance: global_instance_name,
                 textAlign: 'center',
                 acceptOnScroll: false,
-                acceptOnClick: false
+                acceptOnClick: false,
+		acceptOnTimeout: null
             };
 
             this.options = this.default_options;
@@ -475,6 +476,14 @@ THE SOFTWARE.
               on(window, 'click', function(){
                 self.agree_and_close();
               });
+            }
+		
+	    // Agree and close banner after N milliseconds
+	    if (this.options.acceptOnTimeout) {
+	      // Validate this.options.acceptOnTimeout as numeric
+	      if(!isNaN(parseFloat(this.options.acceptOnTimeout)) && isFinite(this.options.acceptOnTimeout)) {
+	        setTimeout(function() { self.agree_and_close(); }, this.options.acceptOnTimeout);
+	      }
             }
             
             doc.body.appendChild(this.element);

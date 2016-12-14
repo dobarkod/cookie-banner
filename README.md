@@ -59,6 +59,7 @@ style. The following options are settable through a `data-` property on the
 * `zindex` - z-index to set on the notice (default: `255`). If `mask` is used, the notice <div>'s z-index is automatically incremented by 1 so it appears above the mask)
 * `accept-on-scroll` - when is set `true` window scrolling is considered as acceptance. (default: `false`)
 * `accept-on-click` - when is set `true` any click on the page is considered as acceptance. (default: `false`)
+* `accept-on-timeout` - when is set to an integer value (milliseconds) it automatically agree and close the banner after the N milliseconds selected. (default: null)
 
 Here's an example:
 

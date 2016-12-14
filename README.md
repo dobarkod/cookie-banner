@@ -49,6 +49,7 @@ style. The following options are settable through a `data-` property on the
   information (default: `cookiebanner-accepted`)
 * `expires` - cookie expiry date/time (defaults to `Infinity` aka `Fri, 31 Dec 9999 23:59:59 GMT`). There's basic support for specifying a callback function (more flexibility, must return one of `Number`, `String`, or `Date` -- see `Cookies.set()`). You can also just specify a valid UTC string.
 * `cookie-path` - Path to set for the cookie
+* `cookie-domain` - Set a custom cookie domain (default: null)
 * `moreinfo` - where the visitor can read more about cookies
   (default: [http://aboutcookies.org](http://aboutcookies.org))
 * `mask` - whether to create a mask over the viewport (default: `false`). Clicking anywhere on the mask is considered as acceptance.

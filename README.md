@@ -61,6 +61,7 @@ style. The following options are settable through a `data-` property on the
 * `accept-on-scroll` - when is set `true` window scrolling is considered as acceptance. (default: `false`)
 * `accept-on-click` - when is set `true` any click on the page is considered as acceptance. (default: `false`)
 * `accept-on-timeout` - when is set to an integer value (milliseconds) it automatically agree and close the banner after the N milliseconds selected. (default: null)
+* `accept-on-first-visit` - when is set `true` the first time an user visits a page the cookie is agreed but the cookiebanner window is not closed. (default: `false`)
 
 Here's an example:
 

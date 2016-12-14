@@ -54,6 +54,8 @@ style. The following options are settable through a `data-` property on the
 * `moreinfo` - where the visitor can read more about cookies
   (default: [http://aboutcookies.org](http://aboutcookies.org))
 * `moreinfo-target` - Set a custom target for moreinfo link (default: `_blank`)
+* `moreinfo-decoration` - Set text decoration for moreinfo link (default: `none`)
+* `moreinfo-font-weight` - Set font weight for moreinfo link (default: `normal`)
 * `mask` - whether to create a mask over the viewport (default: `false`). Clicking anywhere on the mask is considered as acceptance.
 * `mask-opacity` - the opacity to use for the window mask (default: `0.5`)
 * `mask-background` - optional background style you wish to apply to the `mask` <div> (default: `#000`)

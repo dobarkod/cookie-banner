@@ -431,10 +431,14 @@ THE SOFTWARE.
                 el.style.bottom = 0;
             }
 
+	    // Allow to use an alias %LEARNMORE% that is overwritten with the "Learn more" link (maintaining all the options)
+	    // So users can place the "Learn more" link where they want in the message
+	    // If the alias %LEARNMORE% is not present in the message string, 
+	    // It is uses the old style by adding the " <a> Learn more </a>"
             el.innerHTML = '<div class="cookiebanner-close" style="' + this.options.closeStyle + '">' +
                 this.options.closeText + '</div>' +
-                '<span>' + this.options.message + ' <a>' + this.options.linkmsg + '</a></span>';
-
+                '<span>' + (this.options.message.indexOf("%LEARNMORE%") !== -1 ? this.options.message.replace("%LEARNMORE%", '<a>' + this.options.linkmsg + '</a>') : this.options.message + ' <a>' + this.options.linkmsg + '</a>') + '</span>';
+			
             this.element = el;
 
             var el_a = el.getElementsByTagName('a')[0];

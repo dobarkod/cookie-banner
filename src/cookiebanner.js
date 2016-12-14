@@ -244,6 +244,7 @@ THE SOFTWARE.
                 closeText: '&#10006;',
                 closeStyle: 'float:right;padding-left:5px;',
                 cookiePath: '/',
+                cookieDomain: null,
                 debug: false,
                 expires: Infinity,
                 zindex: 255,
@@ -345,7 +346,11 @@ THE SOFTWARE.
         },
 
         agree: function() {
-            this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath);
+			if(this.options.cookieDomain != "") {
+                this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath, this.options.cookieDomain);
+			} else {
+				this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath);
+			}
             return true;
         },
 

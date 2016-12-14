@@ -346,7 +346,7 @@ THE SOFTWARE.
         },
 
         agree: function() {
-			if(this.options.cookieDomain != "") {
+			if(this.options.cookieDomain !== "") {
                 this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath, this.options.cookieDomain);
 			} else {
 				this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath);

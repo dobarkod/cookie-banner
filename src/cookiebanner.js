@@ -260,6 +260,7 @@ THE SOFTWARE.
                 message: default_text,
                 linkmsg: default_link,
                 moreinfo: 'http://aboutcookies.org',
+		moreinfoTarget: '_blank',
                 effect: null,
                 fontSize: '14px',
                 fontFamily: 'arial, sans-serif',
@@ -437,7 +438,7 @@ THE SOFTWARE.
 
             var el_a = el.getElementsByTagName('a')[0];
             el_a.href = this.options.moreinfo;
-            el_a.target = '_blank';
+            el_a.target = this.options.moreinfoTarget;
             el_a.style.textDecoration = 'none';
             el_a.style.color = this.options.link;
 

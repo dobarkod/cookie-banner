@@ -262,6 +262,8 @@ THE SOFTWARE.
                 linkmsg: default_link,
                 moreinfo: 'http://aboutcookies.org',
 		moreinfoTarget: '_blank',
+		moreinfoDecoration: 'none',
+		moreinfoFontWeight: 'normal',
                 effect: null,
                 fontSize: '14px',
                 fontFamily: 'arial, sans-serif',
@@ -438,8 +440,9 @@ THE SOFTWARE.
             var el_a = el.getElementsByTagName('a')[0];
             el_a.href = this.options.moreinfo;
             el_a.target = this.options.moreinfoTarget;
-            el_a.style.textDecoration = 'none';
+            el_a.style.textDecoration = this.options.moreinfoDecoration;
             el_a.style.color = this.options.link;
+	    el_a.style.fontWeight = this.options.moreinfoFontWeight;
 
             var el_x = el.getElementsByTagName('div')[0];
             el_x.style.cursor = 'pointer';

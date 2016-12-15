@@ -245,7 +245,7 @@ THE SOFTWARE.
                 closeStyle: 'float:right;padding-left:5px;',
                 cookiePath: '/',
                 cookieDomain: null,
-		cookieSecure: false,
+                cookieSecure: false,
                 debug: false,
                 expires: Infinity,
                 zindex: 255,
@@ -261,9 +261,9 @@ THE SOFTWARE.
                 message: default_text,
                 linkmsg: default_link,
                 moreinfo: 'http://aboutcookies.org',
-		moreinfoTarget: '_blank',
-		moreinfoDecoration: 'none',
-		moreinfoFontWeight: 'normal',
+                moreinfoTarget: '_blank',
+                moreinfoDecoration: 'none',
+                moreinfoFontWeight: 'normal',
                 effect: null,
                 fontSize: '14px',
                 fontFamily: 'arial, sans-serif',
@@ -271,8 +271,8 @@ THE SOFTWARE.
                 textAlign: 'center',
                 acceptOnScroll: false,
                 acceptOnClick: false,
-		acceptOnTimeout: null,
-		acceptOnFirstVisit: false
+                acceptOnTimeout: null,
+                acceptOnFirstVisit: false
             };
 
             this.options = this.default_options;
@@ -431,10 +431,10 @@ THE SOFTWARE.
                 el.style.bottom = 0;
             }
 
-	    // Allow to use an alias %LEARNMORE% that is overwritten with the "Learn more" link (maintaining all the options)
-	    // So users can place the "Learn more" link where they want in the message
-	    // If the alias %LEARNMORE% is not present in the message string, 
-	    // It is uses the old style by adding the " <a> Learn more </a>"
+            // Allow to use an alias %LEARNMORE% that is overwritten with the "Learn more" link (maintaining all the options)
+            // So users can place the "Learn more" link where they want in the message
+            // If the alias %LEARNMORE% is not present in the message string, 
+            // It is uses the old style by adding the " <a> Learn more </a>"
             el.innerHTML = '<div class="cookiebanner-close" style="' + this.options.closeStyle + '">' +
                 this.options.closeText + '</div>' +
                 '<span>' + (this.options.message.indexOf("%LEARNMORE%") !== -1 ? this.options.message.replace("%LEARNMORE%", '<a>' + this.options.linkmsg + '</a>') : this.options.message + ' <a>' + this.options.linkmsg + '</a>') + '</span>';
@@ -446,7 +446,7 @@ THE SOFTWARE.
             el_a.target = this.options.moreinfoTarget;
             el_a.style.textDecoration = this.options.moreinfoDecoration;
             el_a.style.color = this.options.link;
-	    el_a.style.fontWeight = this.options.moreinfoFontWeight;
+            el_a.style.fontWeight = this.options.moreinfoFontWeight;
 
             var el_x = el.getElementsByTagName('div')[0];
             el_x.style.cursor = 'pointer';
@@ -483,11 +483,11 @@ THE SOFTWARE.
               });
             }
 		
-	    // Agree and close banner after N milliseconds
-	    if (this.options.acceptOnTimeout) {
-	      // Validate this.options.acceptOnTimeout as numeric
-	      if(!isNaN(parseFloat(this.options.acceptOnTimeout)) && isFinite(this.options.acceptOnTimeout)) {
-	        setTimeout(function() { self.agree_and_close(); }, this.options.acceptOnTimeout);
+           // Agree and close banner after N milliseconds
+           if (this.options.acceptOnTimeout) {
+              // Validate this.options.acceptOnTimeout as numeric
+              if(!isNaN(parseFloat(this.options.acceptOnTimeout)) && isFinite(this.options.acceptOnTimeout)) {
+                setTimeout(function() { self.agree_and_close(); }, this.options.acceptOnTimeout);
 	      }
             }
 		

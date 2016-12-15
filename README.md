@@ -37,9 +37,7 @@ style. The following options are settable through a `data-` property on the
 * `bg` - banner background color (default: `#000`)
 * `link` - link text color (default: `#aaa`)
 * `position` - banner position, `top` or `bottom` (default: `bottom`)
-* `message` - the message text ** if you add `%LEARNMORE%` alias in the message it will be replaced with the "Learn more" link (linkmsg and its options) so you can place the "Learn more" link where you want in the message, example usage: 
-`data-linkmsg="cookies policy"
-data-message="By using this site, you agree to our %LEARNMORE%."`
+* `message` - the message text
 * `linkmsg` - the link text content (default: `Learn more`)
 * `close-text` - the text/symbol for the close button (default: `&#10006;`)
 * `close-style` - custom style for .cookiebanner-close (default: `float:right;padding-left:5px;`)

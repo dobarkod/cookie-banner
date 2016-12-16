@@ -484,7 +484,7 @@ THE SOFTWARE.
               // Validate this.options.acceptOnTimeout as numeric
               if(!isNaN(parseFloat(this.options.acceptOnTimeout)) && isFinite(this.options.acceptOnTimeout)) {
                 setTimeout(function() { self.agree_and_close(); }, this.options.acceptOnTimeout);
-	      }
+              }
             }
 		
             // Agree on first time the user visits a page (but do not close the cookiebanner window)

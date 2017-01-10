@@ -434,7 +434,7 @@ THE SOFTWARE.
             el.innerHTML = '<div class="cookiebanner-close" style="' + this.options.closeStyle + '">' +
                 this.options.closeText + '</div>' +
                 '<span>' + this.options.message + (this.options.linkmsg ? ' <a>' + this.options.linkmsg + '</a>' : '') + '</span>';
-			
+
             this.element = el;
 
             var el_a = el.getElementsByTagName('a')[0];
@@ -471,14 +471,14 @@ THE SOFTWARE.
                 self.agree_and_close();
               });
             }
-            
+
             // Agree and close banner on click (no matter where) if `acceptOnClick` option is set `true`
             if (this.options.acceptOnClick) {
               on(window, 'click', function(){
                 self.agree_and_close();
               });
             }
-		
+
             // Agree and close banner after N milliseconds
             if (this.options.acceptOnTimeout) {
               // Validate this.options.acceptOnTimeout as numeric
@@ -486,12 +486,12 @@ THE SOFTWARE.
                 setTimeout(function() { self.agree_and_close(); }, this.options.acceptOnTimeout);
               }
             }
-		
+
             // Agree on first time the user visits a page (but do not close the cookiebanner window)
             if (this.options.acceptOnFirstVisit) {
               self.agree();
             }
-            
+
             doc.body.appendChild(this.element);
             this.inserted = true;
 

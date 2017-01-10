@@ -9,14 +9,16 @@ libraries, css files or images.
 
 ## Demo
 
-To see the script in action, visit the [Good Code web page](http://goodcode.io/).
+To see the script in action [download the files](https://github.com/dobarkod/cookie-banner/archive/master.zip) and open/serve [tests/demo.html](tests/demo.html) and/or [tests/tests.html](tests/tests.html).
 
 ## Quickstart
 
 Add a single line to your web page, just before the closing `</body>` tag:
 
-    <script type="text/javascript" id="cookiebanner"
-        src="http://cookiebanner.eu/js/cookiebanner.min.js"></script>
+```html
+<script type="text/javascript" id="cookiebanner"
+  src="http://cookiebanner.eu/js/cookiebanner.min.js"></script>
+```
 
 This will display a black-and-white floating banner at the bottom of your
 web page, informing the user that the site is using cookies, and giving them
@@ -32,46 +34,46 @@ If you don't like the defaults, you can modify the banner content and
 style. The following options are settable through a `data-` property on the
 `script` tag:
 
-* `height` - banner height (default: `32px`)
-* `fg` - banner text color (default: `#ddd`)
-* `bg` - banner background color (default: `#000`)
-* `link` - link text color (default: `#aaa`)
-* `position` - banner position, `top` or `bottom` (default: `bottom`)
-* `message` - the message text
-* `linkmsg` - the link text content (default: `Learn more`)
-* `close-text` - the text/symbol for the close button (default: `&#10006;`)
-* `close-style` - custom style for .cookiebanner-close (default: `float:right;padding-left:5px;`)
-* `font-size` - the text size of the message and the link (default: `14px`)
-* `font-family` - the font family of the message and the link (default: `arial, sans-serif`)
-* `text-align` - The position of the text (default: `center`)
-* `effect` - effect to use
-* `cookie` - name for the cookie to store the cookiebanner acceptance
-  information (default: `cookiebanner-accepted`)
-* `expires` - cookie expiry date/time (defaults to `Infinity` aka `Fri, 31 Dec 9999 23:59:59 GMT`). There's basic support for specifying a callback function (more flexibility, must return one of `Number`, `String`, or `Date` -- see `Cookies.set()`). You can also just specify a valid UTC string.
+* `height` - Banner/notice height (default: `32px`)
+* `fg` - Banner/notice text color (default: `#ddd`)
+* `bg` - Banner/notice background color (default: `#000`)
+* `link` - Link text color (default: `#aaa`)
+* `position` - Banner/notice position, `top` or `bottom` (default: `bottom`)
+* `message` - Notice message text
+* `linkmsg` - Link text content (default: `Learn more`)
+* `close-text` - Text/symbol for the .cookiebanner-close element (default: `&#10006;`)
+* `close-style` - CSS style for .cookiebanner-close element (default: `float:right;padding-left:5px;`)
+* `font-size` - Text/font size for the .cookiebanner (container) element (default: `14px`)
+* `font-family` - Font family for the .cookiebanner (container) element (default: `arial, sans-serif`)
+* `text-align` - Text align/position for the .cookiebanner (container) element (default: `center`)
+* `effect` - Effect used when inserting the notice, currently only `fade` supported (default: `null`)
+* `cookie` - Name for the cookie that stores acceptance info (default: `cookiebanner-accepted`)
+* `expires` - Cookie expiry date/time (defaults to `Infinity` aka `Fri, 31 Dec 9999 23:59:59 GMT`). There's basic support for specifying a callback function (more flexibility, must return one of `Number`, `String`, or `Date` -- see `Cookies.set()`). You can also just specify a valid UTC string.
 * `cookie-path` - Path to set for the cookie
 * `cookie-domain` - Set a custom cookie domain (default: null)
-* `cookie-secure` - Set (true\false) secure cookie for HTTPS (default: false)
-* `moreinfo` - where the visitor can read more about cookies
-  (default: [http://aboutcookies.org](http://aboutcookies.org))
-* `moreinfo-target` - Set a custom target for moreinfo link (default: `_blank`)
-* `moreinfo-decoration` - Set text decoration for moreinfo link (default: `none`)
-* `moreinfo-font-weight` - Set font weight for moreinfo link (default: `normal`)
-* `mask` - whether to create a mask over the viewport (default: `false`). Clicking anywhere on the mask is considered as acceptance.
-* `mask-opacity` - the opacity to use for the window mask (default: `0.5`)
-* `mask-background` - optional background style you wish to apply to the `mask` <div> (default: `#000`)
-* `zindex` - z-index to set on the notice (default: `255`). If `mask` is used, the notice <div>'s z-index is automatically incremented by 1 so it appears above the mask)
-* `accept-on-scroll` - when is set `true` window scrolling is considered as acceptance. (default: `false`)
-* `accept-on-click` - when is set `true` any click on the page is considered as acceptance. (default: `false`)
-* `accept-on-timeout` - when is set to an integer value (milliseconds) it automatically agree and close the banner after the N milliseconds selected. (default: null)
-* `accept-on-first-visit` - when is set `true` the first time an user visits a page the cookie is agreed but the cookiebanner window is not closed. (default: `false`)
+* `cookie-secure` - Set (`true`/`false`) secure cookie for HTTPS (default: `false`)
+* `moreinfo` - Link where the visitor can read more about cookies (default: [http://aboutcookies.org](http://aboutcookies.org))
+* `moreinfo-target` - Target for `moreinfo` link (default: `_blank`)
+* `moreinfo-decoration` - Text decoration for `moreinfo` link (default: `none`)
+* `moreinfo-font-weight` - Font weight for `moreinfo` link (default: `normal`)
+* `mask` - Controls whether a mask is created over the viewport (default: `false`). Clicking anywhere on the mask is considered as acceptance.
+* `mask-opacity` - Opacity used for the window `mask` (default: `0.5`)
+* `mask-background` - CSS background style applied to the `mask` <div> (default: `#000`)
+* `zindex` - Z-index set on the notice (default: `255`). If `mask` is used, the notice <div>'s z-index is automatically incremented by 1 so it appears above the mask.
+* `accept-on-scroll` - When `true`, agrees and closes the notice when window is scrolled. (default: `false`)
+* `accept-on-click` - When `true`, agrees and closes the notice when clicking anywhere on the page. (default: `false`)
+* `accept-on-first-visit` - When `true`, agrees automatically (which stops showing the notice for subsequent requests), but the notice is not automatically closed. (default: `false`)
+* `accept-on-timeout` - Automatically agrees and closes the notice after specified number of milliseconds. (default: `null`)
 
 Here's an example:
 
-    <script type="text/javascript" id="cookiebanner"
-        src="//cookiebanner.eu/js/cookiebanner.min.js"
-        data-height="20px" data-position="top"
-        data-message="We use cookies to improve your browsing experience.">
-    </script>
+```html
+<script type="text/javascript" id="cookiebanner"
+    src="//cookiebanner.eu/js/cookiebanner.min.js"
+    data-height="20px" data-position="top"
+    data-message="We use cookies to improve your browsing experience.">
+</script>
+```
 
 ## Self-hosting
 
@@ -87,11 +89,13 @@ certificates.
 If the banner needs to be shown, the script will create the following DOM
 subtree and add it just before the closing `</body>` tag:
 
-    <div class="cookiebanner">
-        <div class="cookiebanner-close" style="float: right; padding-left:5px;">x</div>
-        <span>Message</span>
-        <a href=".." target="_blank">Learn more</a>
-    </div>
+```html
+<div class="cookiebanner">
+    <div class="cookiebanner-close" style="float: right; padding-left:5px;">&#10006;</div>
+    <span>Message</span>
+    <a href=".." target="_blank">Learn more</a>
+</div>
+```
 
 You can use CSS with `div.cookiebanner > span` and `div.cookiebanner > a` to
 further modify the banner appearance.
@@ -110,9 +114,11 @@ to catch potential errors, and minifier to minimize its footprint.
 
 We're old-school here so we just use Makefile for the tasks:
 
-    make lint  # run jshint to check the code
-    make test  # run the tests
-    make # minify it
+```sh
+make lint  # run jshint to check the code
+make test  # run the tests
+make # minify it
+```
 
 You'll need `jshint` and `uglifyjs` tools installed for this, and also
 `phantomjs` if you want to run the tests.

@@ -50,15 +50,20 @@ style. The following options are settable through a `data-` property on the
 * `expires` - cookie expiry date/time (defaults to `Infinity` aka `Fri, 31 Dec 9999 23:59:59 GMT`). There's basic support for specifying a callback function (more flexibility, must return one of `Number`, `String`, or `Date` -- see `Cookies.set()`). You can also just specify a valid UTC string.
 * `cookie-path` - Path to set for the cookie
 * `cookie-domain` - Set a custom cookie domain (default: null)
+* `cookie-secure` - Set (true\false) secure cookie for HTTPS (default: false)
 * `moreinfo` - where the visitor can read more about cookies
   (default: [http://aboutcookies.org](http://aboutcookies.org))
 * `moreinfo-target` - Set a custom target for moreinfo link (default: `_blank`)
+* `moreinfo-decoration` - Set text decoration for moreinfo link (default: `none`)
+* `moreinfo-font-weight` - Set font weight for moreinfo link (default: `normal`)
 * `mask` - whether to create a mask over the viewport (default: `false`). Clicking anywhere on the mask is considered as acceptance.
 * `mask-opacity` - the opacity to use for the window mask (default: `0.5`)
 * `mask-background` - optional background style you wish to apply to the `mask` <div> (default: `#000`)
 * `zindex` - z-index to set on the notice (default: `255`). If `mask` is used, the notice <div>'s z-index is automatically incremented by 1 so it appears above the mask)
 * `accept-on-scroll` - when is set `true` window scrolling is considered as acceptance. (default: `false`)
 * `accept-on-click` - when is set `true` any click on the page is considered as acceptance. (default: `false`)
+* `accept-on-timeout` - when is set to an integer value (milliseconds) it automatically agree and close the banner after the N milliseconds selected. (default: null)
+* `accept-on-first-visit` - when is set `true` the first time an user visits a page the cookie is agreed but the cookiebanner window is not closed. (default: `false`)
 
 Here's an example:
 

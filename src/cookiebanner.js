@@ -467,29 +467,29 @@ THE SOFTWARE.
 
             // Agree and close banner on window scroll if `acceptOnScroll` option is set `true`
             if (this.options.acceptOnScroll) {
-              on(window, 'scroll', function(){
-                self.agree_and_close();
-              });
+                on(window, 'scroll', function(){
+                    self.agree_and_close();
+                });
             }
 
             // Agree and close banner on click (no matter where) if `acceptOnClick` option is set `true`
             if (this.options.acceptOnClick) {
-              on(window, 'click', function(){
-                self.agree_and_close();
-              });
+                on(window, 'click', function(){
+                    self.agree_and_close();
+                });
             }
 
             // Agree and close banner after N milliseconds
             if (this.options.acceptOnTimeout) {
-              // Validate this.options.acceptOnTimeout as numeric
-              if(!isNaN(parseFloat(this.options.acceptOnTimeout)) && isFinite(this.options.acceptOnTimeout)) {
-                setTimeout(function() { self.agree_and_close(); }, this.options.acceptOnTimeout);
-              }
+                // Validate this.options.acceptOnTimeout as numeric
+                if(!isNaN(parseFloat(this.options.acceptOnTimeout)) && isFinite(this.options.acceptOnTimeout)) {
+                    setTimeout(function() { self.agree_and_close(); }, this.options.acceptOnTimeout);
+                }
             }
 
             // Agree on first time the user visits a page (but do not close the cookiebanner window)
             if (this.options.acceptOnFirstVisit) {
-              self.agree();
+                self.agree();
             }
 
             doc.body.appendChild(this.element);
@@ -502,7 +502,6 @@ THE SOFTWARE.
                 this.element.style.opacity = 1;
             }
         }
-
     };
 
     if (script_el_invoker) {

@@ -9,7 +9,7 @@ libraries, css files or images.
 
 ## Demo
 
-To see the script in action [download the files](https://github.com/dobarkod/cookie-banner/archive/master.zip) and open/serve [tests/demo.html](tests/demo.html).
+To see the script in action [download the files](https://github.com/dobarkod/cookie-banner/archive/master.zip) and open/serve [tests/demo.html](tests/demo.html) and/or [tests/tests.html](tests/tests.html).
 
 ## Quickstart
 

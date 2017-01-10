@@ -245,6 +245,7 @@ THE SOFTWARE.
                 closeStyle: 'float:right;padding-left:5px;',
                 cookiePath: '/',
                 cookieDomain: null,
+                cookieSecure: false,
                 debug: false,
                 expires: Infinity,
                 zindex: 255,
@@ -260,14 +261,18 @@ THE SOFTWARE.
                 message: default_text,
                 linkmsg: default_link,
                 moreinfo: 'http://aboutcookies.org',
-		moreinfoTarget: '_blank',
+                moreinfoTarget: '_blank',
+                moreinfoDecoration: 'none',
+                moreinfoFontWeight: 'normal',
                 effect: null,
                 fontSize: '14px',
                 fontFamily: 'arial, sans-serif',
                 instance: global_instance_name,
                 textAlign: 'center',
                 acceptOnScroll: false,
-                acceptOnClick: false
+                acceptOnClick: false,
+                acceptOnTimeout: null,
+                acceptOnFirstVisit: false
             };
 
             this.options = this.default_options;
@@ -347,11 +352,7 @@ THE SOFTWARE.
         },
 
         agree: function() {
-			if(this.options.cookieDomain !== "") {
-                this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath, this.options.cookieDomain);
-			} else {
-				this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath);
-			}
+	    this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath, (this.options.cookieDomain !== '' ? this.options.cookieDomain : ''), (this.options.cookieSecure ? true : false));
             return true;
         },
 
@@ -432,15 +433,16 @@ THE SOFTWARE.
 
             el.innerHTML = '<div class="cookiebanner-close" style="' + this.options.closeStyle + '">' +
                 this.options.closeText + '</div>' +
-                '<span>' + this.options.message + ' <a>' + this.options.linkmsg + '</a></span>';
-
+                '<span>' + this.options.message + (this.options.linkmsg ? ' <a>' + this.options.linkmsg + '</a>' : '') + '</span>';
+			
             this.element = el;
 
             var el_a = el.getElementsByTagName('a')[0];
             el_a.href = this.options.moreinfo;
             el_a.target = this.options.moreinfoTarget;
-            el_a.style.textDecoration = 'none';
+            el_a.style.textDecoration = this.options.moreinfoDecoration;
             el_a.style.color = this.options.link;
+            el_a.style.fontWeight = this.options.moreinfoFontWeight;
 
             var el_x = el.getElementsByTagName('div')[0];
             el_x.style.cursor = 'pointer';
@@ -475,6 +477,19 @@ THE SOFTWARE.
               on(window, 'click', function(){
                 self.agree_and_close();
               });
+            }
+		
+            // Agree and close banner after N milliseconds
+            if (this.options.acceptOnTimeout) {
+              // Validate this.options.acceptOnTimeout as numeric
+              if(!isNaN(parseFloat(this.options.acceptOnTimeout)) && isFinite(this.options.acceptOnTimeout)) {
+                setTimeout(function() { self.agree_and_close(); }, this.options.acceptOnTimeout);
+              }
+            }
+		
+            // Agree on first time the user visits a page (but do not close the cookiebanner window)
+            if (this.options.acceptOnFirstVisit) {
+              self.agree();
             }
             
             doc.body.appendChild(this.element);

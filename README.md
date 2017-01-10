@@ -15,8 +15,10 @@ To see the script in action [download the files](https://github.com/dobarkod/coo
 
 Add a single line to your web page, just before the closing `</body>` tag:
 
-    <script type="text/javascript" id="cookiebanner"
-        src="http://cookiebanner.eu/js/cookiebanner.min.js"></script>
+```html
+<script type="text/javascript" id="cookiebanner"
+  src="http://cookiebanner.eu/js/cookiebanner.min.js"></script>
+```
 
 This will display a black-and-white floating banner at the bottom of your
 web page, informing the user that the site is using cookies, and giving them
@@ -65,11 +67,13 @@ style. The following options are settable through a `data-` property on the
 
 Here's an example:
 
-    <script type="text/javascript" id="cookiebanner"
-        src="//cookiebanner.eu/js/cookiebanner.min.js"
-        data-height="20px" data-position="top"
-        data-message="We use cookies to improve your browsing experience.">
-    </script>
+```html
+<script type="text/javascript" id="cookiebanner"
+    src="//cookiebanner.eu/js/cookiebanner.min.js"
+    data-height="20px" data-position="top"
+    data-message="We use cookies to improve your browsing experience.">
+</script>
+```
 
 ## Self-hosting
 
@@ -85,11 +89,13 @@ certificates.
 If the banner needs to be shown, the script will create the following DOM
 subtree and add it just before the closing `</body>` tag:
 
-    <div class="cookiebanner">
-        <div class="cookiebanner-close" style="float: right; padding-left:5px;">x</div>
-        <span>Message</span>
-        <a href=".." target="_blank">Learn more</a>
-    </div>
+```html
+<div class="cookiebanner">
+    <div class="cookiebanner-close" style="float: right; padding-left:5px;">&#10006;</div>
+    <span>Message</span>
+    <a href=".." target="_blank">Learn more</a>
+</div>
+```
 
 You can use CSS with `div.cookiebanner > span` and `div.cookiebanner > a` to
 further modify the banner appearance.
@@ -108,9 +114,11 @@ to catch potential errors, and minifier to minimize its footprint.
 
 We're old-school here so we just use Makefile for the tasks:
 
-    make lint  # run jshint to check the code
-    make test  # run the tests
-    make # minify it
+```sh
+make lint  # run jshint to check the code
+make test  # run the tests
+make # minify it
+```
 
 You'll need `jshint` and `uglifyjs` tools installed for this, and also
 `phantomjs` if you want to run the tests.

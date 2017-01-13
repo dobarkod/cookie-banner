@@ -13,20 +13,21 @@ MINILICENSE = "/*! (C) $(TITLE) v$(VERSION) - MIT License - $(HOMEPAGE) */"
 
 .PHONY: all clean license
 
-all: src/cookiebanner.min.js
+all: dist/cookiebanner.min.js
 
 lint: src/cookiebanner.js
 	$(LINT) $<
 
-src/cookiebanner.min.js: src/cookiebanner.js
+dist/cookiebanner.min.js: src/cookiebanner.js
 	echo $(MINILICENSE) > $@
 	$(MINIFY) < $< >> $@
 
 clean:
+	rm -f dist/cookiebanner.min.js
 	rm -f src/cookiebanner.min.js
 
-publish: src/cookiebanner.min.js
-	$(UPLOAD) src/cookiebanner.min.js s3://cookiebanner.eu/js/cookiebanner.min.js
+publish: dist/cookiebanner.min.js
+	$(UPLOAD) dist/cookiebanner.min.js s3://cookiebanner.eu/js/cookiebanner.min.js
 
 test:
 	$(MAKE) lint

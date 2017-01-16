@@ -17,7 +17,7 @@ Add a single line to your web page, just before the closing `</body>` tag:
 
 ```html
 <script type="text/javascript" id="cookiebanner"
-  src="http://cookiebanner.eu/js/cookiebanner.min.js"></script>
+  src="https://cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.0.0/cookiebanner.min.js"></script>
 ```
 
 This will display a black-and-white floating banner at the bottom of your
@@ -69,7 +69,7 @@ Here's an example:
 
 ```html
 <script type="text/javascript" id="cookiebanner"
-    src="//cookiebanner.eu/js/cookiebanner.min.js"
+    src="//cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.0.0/cookiebanner.min.js"
     data-height="20px" data-position="top"
     data-message="We use cookies to improve your browsing experience.">
 </script>

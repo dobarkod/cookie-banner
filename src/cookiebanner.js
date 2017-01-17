@@ -443,6 +443,7 @@ THE SOFTWARE.
             el_a.style.textDecoration = this.options.moreinfoDecoration;
             el_a.style.color = this.options.link;
             el_a.style.fontWeight = this.options.moreinfoFontWeight;
+            el_a.style.fontSize = this.options.fontSize;
 
             var el_x = el.getElementsByTagName('div')[0];
             el_x.style.cursor = 'pointer';

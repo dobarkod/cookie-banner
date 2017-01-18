@@ -264,6 +264,7 @@ THE SOFTWARE.
                 moreinfoTarget: '_blank',
                 moreinfoDecoration: 'none',
                 moreinfoFontWeight: 'normal',
+                moreinfoFontSize: null,
                 effect: null,
                 fontSize: '14px',
                 fontFamily: 'arial, sans-serif',
@@ -443,8 +444,10 @@ THE SOFTWARE.
             el_a.style.textDecoration = this.options.moreinfoDecoration;
             el_a.style.color = this.options.link;
             el_a.style.fontWeight = this.options.moreinfoFontWeight;
-            el_a.style.fontSize = this.options.fontSize;
-
+            if(this.options.moreinfoFontSize !== '') {
+                el_a.style.fontSize = this.options.moreinfoFontSize;
+            }
+		
             var el_x = el.getElementsByTagName('div')[0];
             el_x.style.cursor = 'pointer';
 

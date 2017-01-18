@@ -1,4 +1,4 @@
-# Cookie Banner
+# Cookie Banner [![Build Status](https://img.shields.io/travis/dobarkod/cookie-banner.svg?style=flat-square)](https://travis-ci.org/dobarkod/cookie-banner)
 
 Cookie Banner is a super-easy way to ensure you're complying with the EU
 cookie law. Just reference the `cookiebanner.min.js` script from your page
@@ -77,12 +77,8 @@ Here's an example:
 
 ## Self-hosting
 
-If you don't want to depend on the `cookiebanner.eu` site, you can copy
-the `cookiebanner.min.js` directly to your site.
-
-If you're using SSL, you'll also need to host the file yourself, as Amazon S3
-service that we're using for hosting doesn't support adding custom SSL
-certificates.
+If you don't want to depend on `cdnjs.cloudflare.com` site, copy
+the `cookiebanner.min.js` file directly to your site and serve it yourself.
 
 ## Internals and more options
 

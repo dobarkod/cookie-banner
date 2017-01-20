@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 ### Added
-- n/a
+- New option: `moreinfo-font-size` (sets font-size for `moreinfo` link when the site's CSS can't be changed)
 
 ### Changed
 - n/a

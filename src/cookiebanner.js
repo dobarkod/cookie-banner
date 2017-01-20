@@ -28,6 +28,7 @@ THE SOFTWARE.
 
     var global_instance_name = 'cbinstance';
 
+    /*eslint-disable */
     /*!
      * contentloaded.js
      *
@@ -74,6 +75,7 @@ THE SOFTWARE.
             win[add](pre + 'load', init, false);
         }
     }
+    /*eslint-enable */
 
     var Cookies = {
         get: function (key) {
@@ -320,9 +322,11 @@ THE SOFTWARE.
         },
 
         log: function(){
+            /* eslint-disable no-console */
             if ('undefined' !== typeof console) {
                 console.log.apply(console, arguments);
             }
+            /* eslint-enable no-console */
         },
 
         run: function() {

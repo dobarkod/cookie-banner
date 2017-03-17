@@ -81,6 +81,16 @@ Here's an example:
 If you don't want to depend on `cdnjs.cloudflare.com` site, copy
 the `cookiebanner.min.js` file directly to your site and serve it yourself.
 
+If you want to compile cookiebanner with the rest of your application's javascript,
+you can call it with options as follows:
+
+```html
+<script type="text/javascript">
+      var options = { message: "We use cookies to enhance your experience.", moreinfo: "/about/cookies" };
+      var cb = new Cookiebanner(options); cb.run();
+</script>
+```
+
 ## Internals and more options
 
 If the banner needs to be shown, the script will create the following DOM

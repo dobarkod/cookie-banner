@@ -2,13 +2,17 @@
 
 ## [Unreleased]
 ### Added
-- New option: `moreinfo-font-size` (sets font-size for `moreinfo` link when the site's CSS can't be changed)
+- n/a
 
 ### Changed
 - n/a
 
 ### Fixed
 - n/a
+
+## [1.1.0](https://github.com/dobarkod/cookie-banner/compare/1.0.0...1.1.0) - 2017-03-30
+### Added
+ - New option: `moreinfo-font-size` (sets font-size for `moreinfo` link when the site's CSS can't be changed)
 
 ## [1.0.0](https://github.com/dobarkod/cookie-banner/compare/761222ef3c62efa93c5660a2e1fea52f5e4e2176...1.0.0) - 2017-01-13
 ### Added

@@ -1,25 +1,26 @@
 {
-    "name": "cookie-banner",
-    "title": "Cookie Banner",
-    "description": "Javascript based cookie-info banner for complying with EU cookie law.",
-    "version": "1.0.0",
-    "homepage": "http://cookiebanner.eu/",
-    "author": {
-        "name": "Good Code and Cookie Banner contributors",
-        "url": "https://github.com/dobarkod/cookie-banner/graphs/contributors"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/dobarkod/cookie-banner"
-    },
-    "bugs": {
-        "url": "https://github.com/dobarkod/cookie-banner/issues"
-    },
-    "license": "MIT",
-    "dependencies": {},
-    "devDependencies": {
-        "phantomjs-prebuilt": "~2.1.1",
-        "uglify-js": "~2.7.4",
-        "jshint": "~2.9.2"
-    }
+  "name": "cookie-banner",
+  "title": "Cookie Banner",
+  "description": "Javascript based cookie-info banner for complying with EU cookie law.",
+  "version": "1.0.0",
+  "homepage": "http://cookiebanner.eu/",
+  "author": {
+    "name": "Good Code and Cookie Banner contributors",
+    "url": "https://github.com/dobarkod/cookie-banner/graphs/contributors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dobarkod/cookie-banner"
+  },
+  "bugs": {
+    "url": "https://github.com/dobarkod/cookie-banner/issues"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "~3.13.1",
+    "jshint": "~2.9.2",
+    "phantomjs-prebuilt": "~2.1.1",
+    "uglify-js": "~2.7.4"
+  }
 }

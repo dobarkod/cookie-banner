@@ -28,6 +28,7 @@ THE SOFTWARE.
 
     var global_instance_name = 'cbinstance';
 
+    /*eslint-disable */
     /*!
      * contentloaded.js
      *
@@ -74,6 +75,7 @@ THE SOFTWARE.
             win[add](pre + 'load', init, false);
         }
     }
+    /*eslint-enable */
 
     var Cookies = {
         get: function (key) {
@@ -321,9 +323,11 @@ THE SOFTWARE.
         },
 
         log: function(){
+            /* eslint-disable no-console */
             if ('undefined' !== typeof console) {
                 console.log.apply(console, arguments);
             }
+            /* eslint-enable no-console */
         },
 
         run: function() {
@@ -353,7 +357,7 @@ THE SOFTWARE.
         },
 
         agree: function() {
-	    this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath, (this.options.cookieDomain !== '' ? this.options.cookieDomain : ''), (this.options.cookieSecure ? true : false));
+            this.cookiejar.set(this.options.cookie, 1, this.options.expires, this.options.cookiePath, (this.options.cookieDomain !== '' ? this.options.cookieDomain : ''), (this.options.cookieSecure ? true : false));
             return true;
         },
 

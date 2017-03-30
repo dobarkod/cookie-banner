@@ -1,5 +1,6 @@
 MINIFY = uglifyjs --lint -c -m toplevel=true
 LINT = jshint --show-non-errors
+ESLINT = eslint
 UPLOAD = s3cmd put -P
 
 define GetFromPkg
@@ -17,6 +18,7 @@ all: dist/cookiebanner.min.js
 
 lint: src/cookiebanner.js
 	$(LINT) $<
+	$(ESLINT) $<
 
 dist/cookiebanner.min.js: src/cookiebanner.js
 	echo $(MINILICENSE) > $@

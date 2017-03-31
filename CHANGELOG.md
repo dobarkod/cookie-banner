@@ -10,6 +10,10 @@
 ### Fixed
 - n/a
 
+## [1.1.1](https://github.com/dobarkod/cookie-banner/compare/1.1.0...1.1.1) - 2017-03-30
+### Fixed
+ - Nothing really, just bumping version for cdnjs to pick up latest version
+
 ## [1.1.0](https://github.com/dobarkod/cookie-banner/compare/1.0.0...1.1.0) - 2017-03-30
 ### Added
  - New option: `moreinfo-font-size` (sets font-size for `moreinfo` link when the site's CSS can't be changed)

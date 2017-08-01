@@ -57,6 +57,7 @@ style. The following options are settable through a `data-` property on the
 * `moreinfo-decoration` - Text decoration for `moreinfo` link (default: `none`)
 * `moreinfo-font-weight` - Font weight for `moreinfo` link (default: `normal`)
 * `moreinfo-font-size` - Font size (i.e 12px) for `moreinfo` link (default: null)
+* `moreinfo-rel` - Rel attribute value for `moreinfo` link (default: `noopener noreferrer`). Set to `false` or `` if you wish to disable it.
 * `mask` - Controls whether a mask is created over the viewport (default: `false`). Clicking anywhere on the mask is considered as acceptance.
 * `mask-opacity` - Opacity used for the window `mask` (default: `0.5`)
 * `mask-background` - CSS background style applied to the `mask` <div> (default: `#000`)

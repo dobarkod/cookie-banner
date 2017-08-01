@@ -10,6 +10,10 @@
 ### Fixed
 - n/a
 
+## [1.2.0](https://github.com/dobarkod/cookie-banner/compare/1.1.1...1.2.0) - 2017-08-01
+### Added
+- New option: `moreinfo-rel` (controls rel attribute value for `moreinfo` link, defaults to `noopener noreferrer`)
+
 ## [1.1.1](https://github.com/dobarkod/cookie-banner/compare/1.1.0...1.1.1) - 2017-03-30
 ### Fixed
  - Nothing really, just bumping version for cdnjs to pick up latest version

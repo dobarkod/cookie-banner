@@ -146,6 +146,14 @@ QUnit.test('Options override / merge / normalization', function(assert) {
     window.expires_callback = undefined;
 });
 
+QUnit.test('rel opener noreferrer option', function(assert) {
+    this.banner = new Cookiebanner();
+    assert.deepEqual(this.banner.options.moreinfoRel, 'noopener noreferrer', 'moreinfoRel option defaults to "noopener noreferrer"');
+    this.banner = new Cookiebanner({moreinfoRel: ''});
+    assert.deepEqual(this.banner.options.moreinfoRel, '', 'rel="noopener noreferrer" is overridden');
+    this.banner = new Cookiebanner({moreinfoRel: false});
+    assert.deepEqual(this.banner.options.moreinfoRel, false, 'rel="noopener noreferrer" is overridden');
+});
 
 QUnit.module('Invocations', {
     setup: function(){},

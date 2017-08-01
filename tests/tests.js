@@ -66,7 +66,7 @@ var remove_el = function(id) {
 
 var Cookies = {
     get: function (key) {
-        return decodeURIComponent(doc.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(key).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+        return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(key).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
     },
     set: function (key, val, end, path, domain, secure) {
         if (!key || /^(?:expires|max\-age|path|domain|secure)$/i.test(key)) {

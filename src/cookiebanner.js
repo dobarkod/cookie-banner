@@ -491,7 +491,7 @@ THE SOFTWARE.
             // Agree and close banner after N milliseconds
             if (this.options.acceptOnTimeout) {
                 // Validate this.options.acceptOnTimeout as numeric
-                if(!isNaN(parseFloat(this.options.acceptOnTimeout)) && isFinite(this.options.acceptOnTimeout)) {
+                if (!isNaN(parseFloat(this.options.acceptOnTimeout)) && isFinite(this.options.acceptOnTimeout)) {
                     setTimeout(function() { self.agree_and_close(); }, this.options.acceptOnTimeout);
                 }
             }

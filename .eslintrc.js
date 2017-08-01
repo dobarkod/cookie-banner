@@ -5,6 +5,19 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "rules": {
-        "no-mixed-spaces-and-tabs": "error"
+        "no-mixed-spaces-and-tabs": "error",
+        "no-irregular-whitespace": "error",
+        "curly": "error",
+        "eqeqeq": "error",
+        "dot-notation": "error",
+        "no-inner-declarations": "error",
+        "no-alert": "error",
+        "no-caller": "error",
+        "no-empty-pattern": "error",
+        "no-implicit-coercion": "error",
+        "no-multi-spaces": "error",
+        "no-redeclare": "error",
+        "no-self-assign": "error",
+        "no-useless-return": "error"
     }
 };

@@ -115,7 +115,7 @@ THE SOFTWARE.
     var Utils = {
 
         // merge objects and whatnot
-        merge: function(){
+        merge: function() {
             var obj = {},
                 i = 0,
                 al = arguments.length,
@@ -134,7 +134,7 @@ THE SOFTWARE.
         },
 
         str2bool: function(str) {
-            str = '' + str;
+            str = String(str);
             switch (str.toLowerCase()) {
                 case 'false':
                 case 'no':
@@ -196,11 +196,11 @@ THE SOFTWARE.
         camelize: function(str) {
             var separator = '-',
                 match = str.indexOf(separator);
-            while (match != -1) {
+            while (match !== -1) {
                 var last = (match === (str.length - 1)),
                     next = last ? '' : str[match + 1],
                     upnext = next.toUpperCase(),
-                    sep_substr =  last ? separator : separator + next;
+                    sep_substr = last ? separator : separator + next;
                 str = str.replace(sep_substr, upnext);
                 match = str.indexOf(separator);
             }
@@ -323,7 +323,7 @@ THE SOFTWARE.
             }
         },
 
-        log: function(){
+        log: function() {
             /* eslint-disable no-console */
             if ('undefined' !== typeof console) {
                 console.log.apply(console, arguments);
@@ -362,7 +362,7 @@ THE SOFTWARE.
             return true;
         },
 
-        agreed: function(){
+        agreed: function() {
             return this.cookiejar.has(this.options.cookie);
         },
 

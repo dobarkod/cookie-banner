@@ -144,6 +144,7 @@ QUnit.test('Options override / merge / normalization', function(assert) {
     assert.strictEqual(banner.options.camelCasedWinsOverDashed, 'winning', 'option specified as camelCased wins over the dashed version');
     assert.strictEqual(banner.options.camelCasedWinsOverDashedRegardlessOfOrder, 'winning', 'option specified as camelCased wins regardless of which was specified "first"');
     window.expires_callback = undefined;
+    banner.cleanup();
 });
 
 QUnit.test('rel opener noreferrer option', function(assert) {
@@ -164,7 +165,11 @@ QUnit.test('Inserted automatically if called via <script id="cookiebanner"> + cl
     stop();
     inject_script(script_src, 'cookiebanner', {}, 'head', function(){
         assert.ok(window.cbinstance, 'script loaded and window.cbinstance is truthy');
-        assert.ok(window.cbinstance.inserted, 'window.cbinstance.inserted = true');
+        if (!window.cbinstance.agreed()) {
+            assert.ok(window.cbinstance.inserted, 'window.cbinstance.inserted = true (not agreed, notice inserted)');
+        } else {
+            assert.ok(!window.cbinstance.inserted, 'window.cbinstance.inserted = false (agreed already, notice not inserted');
+        }
         window.cbinstance.cleanup();
         assert.strictEqual(undefined, window.cbinstance, 'global window.cbinstance is undefined (meaning cleanup() was successfull)');
         start();

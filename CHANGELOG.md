@@ -8,7 +8,8 @@
 - n/a
 
 ### Fixed
-- n/a
+- Tightened up some loose ends in tests
+- Added some more eslint rules
 
 ## [1.2.0](https://github.com/dobarkod/cookie-banner/compare/1.1.1...1.2.0) - 2017-08-01
 ### Added

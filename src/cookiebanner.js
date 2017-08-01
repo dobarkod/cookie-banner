@@ -445,6 +445,7 @@ THE SOFTWARE.
             var el_a = el.getElementsByTagName('a')[0];
             el_a.href = this.options.moreinfo;
             el_a.target = this.options.moreinfoTarget;
+            el_a.rel = "noopener noreferrer";
             el_a.style.textDecoration = this.options.moreinfoDecoration;
             el_a.style.color = this.options.link;
             el_a.style.fontWeight = this.options.moreinfoFontWeight;

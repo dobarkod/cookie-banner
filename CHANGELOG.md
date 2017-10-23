@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 ### Added
-- n/a
+- New option: `closePrecedes` (default `true` allows `cookiebanner-close` follow the `span` element with the message)
 
 ### Changed
 - n/a

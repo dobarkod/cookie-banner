@@ -245,6 +245,7 @@ THE SOFTWARE.
                 cookie: 'cookiebanner-accepted',
                 closeText: '&#10006;',
                 closeStyle: 'float:right;padding-left:5px;',
+                closePrecedes: true,
                 cookiePath: '/',
                 cookieDomain: null,
                 cookieSecure: false,
@@ -437,9 +438,20 @@ THE SOFTWARE.
                 el.style.bottom = 0;
             }
 
-            el.innerHTML = '<div class="cookiebanner-close" style="' + this.options.closeStyle + '">' +
-                this.options.closeText + '</div>' +
-                '<span>' + this.options.message + (this.options.linkmsg ? ' <a>' + this.options.linkmsg + '</a>' : '') + '</span>';
+
+            var closeHtml = '<div class="cookiebanner-close" style="' + this.options.closeStyle + '">' +
+                this.options.closeText + '</div>';
+            var messageHtml = '<span>' + this.options.message + (this.options.linkmsg ? ' <a>' + this.options.linkmsg + '</a>' : '') + '</span>';
+
+            if ( this.options.closePrecedes == 'false' )
+            {
+              el.innerHTML = messageHtml + closeHtml;
+            }
+            else
+            {
+              el.innerHTML = closeHtml + messageHtml;
+            }
+
 
             this.element = el;
 

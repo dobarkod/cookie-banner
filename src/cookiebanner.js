@@ -443,7 +443,7 @@ THE SOFTWARE.
                 this.options.closeText + '</div>';
             var messageHtml = '<span>' + this.options.message + (this.options.linkmsg ? ' <a>' + this.options.linkmsg + '</a>' : '') + '</span>';
 
-            if ( this.options.closePrecedes == 'false' )
+            if ( this.options.closePrecedes === 'false' )
             {
               el.innerHTML = messageHtml + closeHtml;
             }

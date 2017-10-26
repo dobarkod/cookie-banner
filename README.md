@@ -17,7 +17,13 @@ Add a single line to your web page, just before the closing `</body>` tag:
 
 ```html
 <script type="text/javascript" id="cookiebanner"
-  src="https://cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.0.0/cookiebanner.min.js"></script>
+  src="https://cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.2.1/cookiebanner.min.js"></script>
+```
+
+or via [jsDelivr CDN](https://www.jsdelivr.com/):
+```html
+<script type="text/javascript" id="cookiebanner"
+  src="https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner@1/dist/cookiebanner.min.js"></script>
 ```
 
 This will display a black-and-white floating banner at the bottom of your
@@ -41,8 +47,9 @@ style. The following options are settable through a `data-` property on the
 * `position` - Banner/notice position, `top` or `bottom` (default: `bottom`)
 * `message` - Notice message text
 * `linkmsg` - Link text content (default: `Learn more`)
-* `close-text` - Text/symbol for the .cookiebanner-close element (default: `&#10006;`)
-* `close-style` - CSS style for .cookiebanner-close element (default: `float:right;padding-left:5px;`)
+* `close-text` - Text/symbol for the `.cookiebanner-close` element (default: `&#10006;`)
+* `close-style` - CSS style for `.cookiebanner-close` element (default: `float:right;padding-left:5px;`)
+* `close-precedes` - Controls whether `.cookiebanner-close` element precedes or follows the `<span>` containing the message (default: `true`)
 * `font-size` - Text/font size for the .cookiebanner (container) element (default: `14px`)
 * `font-family` - Font family for the .cookiebanner (container) element (default: `arial, sans-serif`)
 * `text-align` - Text align/position for the .cookiebanner (container) element (default: `center`)
@@ -50,13 +57,13 @@ style. The following options are settable through a `data-` property on the
 * `cookie` - Name for the cookie that stores acceptance info (default: `cookiebanner-accepted`)
 * `expires` - Cookie expiry date/time (defaults to `Infinity` aka `Fri, 31 Dec 9999 23:59:59 GMT`). There's basic support for specifying a callback function (more flexibility, must return one of `Number`, `String`, or `Date` -- see `Cookies.set()`). You can also just specify a valid UTC string.
 * `cookie-path` - Path to set for the cookie
-* `cookie-domain` - Set a custom cookie domain (default: null)
+* `cookie-domain` - Set a custom cookie domain (default: `null`)
 * `cookie-secure` - Set (`true`/`false`) secure cookie for HTTPS (default: `false`)
 * `moreinfo` - Link where the visitor can read more about cookies (default: [http://aboutcookies.org](http://aboutcookies.org))
 * `moreinfo-target` - Target for `moreinfo` link (default: `_blank`)
 * `moreinfo-decoration` - Text decoration for `moreinfo` link (default: `none`)
 * `moreinfo-font-weight` - Font weight for `moreinfo` link (default: `normal`)
-* `moreinfo-font-size` - Font size (i.e 12px) for `moreinfo` link (default: null)
+* `moreinfo-font-size` - Font size (i.e 12px) for `moreinfo` link (default: `null`)
 * `moreinfo-rel` - Rel attribute value for `moreinfo` link (default: `noopener noreferrer`). Set to `false` or `` if you wish to disable it.
 * `mask` - Controls whether a mask is created over the viewport (default: `false`). Clicking anywhere on the mask is considered as acceptance.
 * `mask-opacity` - Opacity used for the window `mask` (default: `0.5`)
@@ -71,7 +78,7 @@ Here's an example:
 
 ```html
 <script type="text/javascript" id="cookiebanner"
-    src="//cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.0.0/cookiebanner.min.js"
+    src="//cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.2.1/cookiebanner.min.js"
     data-height="20px" data-position="top"
     data-message="We use cookies to improve your browsing experience.">
 </script>
@@ -79,7 +86,7 @@ Here's an example:
 
 ## Self-hosting
 
-If you don't want to depend on `cdnjs.cloudflare.com` site, copy
+If you don't want to depend on `cdnjs.cloudflare.com` or `cdn.jsdelivr.net`, copy
 the `cookiebanner.min.js` file directly to your site and serve it yourself.
 
 If you want to compile cookiebanner with the rest of your application's javascript,
@@ -95,13 +102,21 @@ you can call it with options as follows:
 ## Internals and more options
 
 If the banner needs to be shown, the script will create the following DOM
-subtree and add it just before the closing `</body>` tag:
+subtree by default and add it just before the closing `</body>` tag:
 
 ```html
 <div class="cookiebanner">
     <div class="cookiebanner-close" style="float: right; padding-left:5px;">&#10006;</div>
-    <span>Message</span>
-    <a href=".." target="_blank">Learn more</a>
+    <span>Message. <a rel="noopener noreferrer" href=".." target="_blank">Learn more</a></span>
+</div>
+```
+
+If the `close-precedes` option is sto to `false` (added in 1.2.1), the DOM looks
+slightly different:
+```html
+<div class="cookiebanner">
+    <span>Message. <a rel="noopener noreferrer" href=".." target="_blank">Learn more</a></span>
+    <div class="cookiebanner-close" style="float: right; padding-left:5px;">&#10006;</div>
 </div>
 ```
 
@@ -128,8 +143,8 @@ make test  # run the tests
 make # minify it
 ```
 
-You'll need `jshint` and `uglifyjs` tools installed for this, and also
-`phantomjs` if you want to run the tests.
+You'll need `jshint`, `eslint` and `uglifyjs` tools installed for this, and also
+`phantomjs` if you want to run the automated tests.
 
 Pull requests are welcome! In order to get your pull-request accepted,
 please follow these simple rules:

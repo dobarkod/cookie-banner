@@ -79,10 +79,10 @@ THE SOFTWARE.
 
     var Cookies = {
         get: function (key) {
-            return decodeURIComponent(doc.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(key).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+            return decodeURIComponent(doc.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(key).replace(/[-.+*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
         },
         set: function (key, val, end, path, domain, secure) {
-            if (!key || /^(?:expires|max\-age|path|domain|secure)$/i.test(key)) {
+            if (!key || /^(?:expires|max-age|path|domain|secure)$/i.test(key)) {
                 return false;
             }
             var expires = '';
@@ -103,7 +103,7 @@ THE SOFTWARE.
             return true;
         },
         has: function (key) {
-            return (new RegExp('(?:^|;\\s*)' + encodeURIComponent(key).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=')).test(doc.cookie);
+            return (new RegExp('(?:^|;\\s*)' + encodeURIComponent(key).replace(/[-.+*]/g, '\\$&') + '\\s*\\=')).test(doc.cookie);
         },
         remove: function (key, path, domain) {
             if (!key || !this.has(key)) { return false; }

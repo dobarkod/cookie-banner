@@ -23,7 +23,7 @@ Add a single line to your web page, just before the closing `</body>` tag:
 or via [cdnjs](https://cdnjs.com/):
 ```html
 <script type="text/javascript" id="cookiebanner"
-  src="https://cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.2.0/cookiebanner.min.js"></script>
+  src="https://cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.2.1/cookiebanner.min.js"></script>
 ```
 
 This will display a black-and-white floating banner at the bottom of your

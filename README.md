@@ -17,13 +17,13 @@ Add a single line to your web page, just before the closing `</body>` tag:
 
 ```html
 <script type="text/javascript" id="cookiebanner"
-  src="https://cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.2.1/cookiebanner.min.js"></script>
+  src="https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner@1.2.1/dist/cookiebanner.min.js"></script>
 ```
 
-or via [jsDelivr CDN](https://www.jsdelivr.com/):
+or via [cdnjs](https://cdnjs.com/):
 ```html
 <script type="text/javascript" id="cookiebanner"
-  src="https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner@1/dist/cookiebanner.min.js"></script>
+  src="https://cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.2.0/cookiebanner.min.js"></script>
 ```
 
 This will display a black-and-white floating banner at the bottom of your
@@ -78,7 +78,7 @@ Here's an example:
 
 ```html
 <script type="text/javascript" id="cookiebanner"
-    src="//cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.2.1/cookiebanner.min.js"
+    src="https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner@1.2.1/dist/cookiebanner.min.js"
     data-height="20px" data-position="top"
     data-message="We use cookies to improve your browsing experience.">
 </script>
@@ -86,7 +86,7 @@ Here's an example:
 
 ## Self-hosting
 
-If you don't want to depend on `cdnjs.cloudflare.com` or `cdn.jsdelivr.net`, copy
+If you don't want to depend on `cdnjs` or `jsdelivr`, copy
 the `cookiebanner.min.js` file directly to your site and serve it yourself.
 
 If you want to compile cookiebanner with the rest of your application's javascript,
@@ -129,8 +129,9 @@ Keep in mind that you might have to override and/or reset certain properties by 
 ## Hacking
 
 Get the newest and the freshest from GitHub:
-
-    git clone https://github.com/dobarkod/cookie-banner.git
+```sh
+git clone https://github.com/dobarkod/cookie-banner.git
+```
 
 If you've modified the code, it's recommended you run it through linter
 to catch potential errors, and minifier to minimize its footprint.

@@ -79,10 +79,10 @@ THE SOFTWARE.
 
     var Cookies = {
         get: function (key) {
-            return decodeURIComponent(doc.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(key).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+            return decodeURIComponent(doc.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(key).replace(/[-.+*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
         },
         set: function (key, val, end, path, domain, secure) {
-            if (!key || /^(?:expires|max\-age|path|domain|secure)$/i.test(key)) {
+            if (!key || /^(?:expires|max-age|path|domain|secure)$/i.test(key)) {
                 return false;
             }
             var expires = '';
@@ -103,7 +103,7 @@ THE SOFTWARE.
             return true;
         },
         has: function (key) {
-            return (new RegExp('(?:^|;\\s*)' + encodeURIComponent(key).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=')).test(doc.cookie);
+            return (new RegExp('(?:^|;\\s*)' + encodeURIComponent(key).replace(/[-.+*]/g, '\\$&') + '\\s*\\=')).test(doc.cookie);
         },
         remove: function (key, path, domain) {
             if (!key || !this.has(key)) { return false; }
@@ -245,6 +245,7 @@ THE SOFTWARE.
                 cookie: 'cookiebanner-accepted',
                 closeText: '&#10006;',
                 closeStyle: 'float:right;padding-left:5px;',
+                closePrecedes: true,
                 cookiePath: '/',
                 cookieDomain: null,
                 cookieSecure: false,
@@ -301,6 +302,7 @@ THE SOFTWARE.
             // TODO: parse/validate other options that can benefit
             this.options.zindex = parseInt(this.options.zindex, 10);
             this.options.mask = Utils.str2bool(this.options.mask);
+            this.options.closePrecedes = Utils.str2bool(this.options.closePrecedes);
 
             // check for a possible global callback specified as a string
             if ('string' === typeof this.options.expires) {
@@ -437,9 +439,15 @@ THE SOFTWARE.
                 el.style.bottom = 0;
             }
 
-            el.innerHTML = '<div class="cookiebanner-close" style="' + this.options.closeStyle + '">' +
-                this.options.closeText + '</div>' +
-                '<span>' + this.options.message + (this.options.linkmsg ? ' <a>' + this.options.linkmsg + '</a>' : '') + '</span>';
+            var closeHtml = '<div class="cookiebanner-close" style="' + this.options.closeStyle + '">' +
+                this.options.closeText + '</div>';
+            var messageHtml = '<span>' + this.options.message + (this.options.linkmsg ? ' <a>' + this.options.linkmsg + '</a>' : '') + '</span>';
+
+            if (this.options.closePrecedes) {
+                el.innerHTML = closeHtml + messageHtml;
+            } else {
+                el.innerHTML = messageHtml + closeHtml;
+            }
 
             this.element = el;
 

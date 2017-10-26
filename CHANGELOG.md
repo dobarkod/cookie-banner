@@ -2,14 +2,22 @@
 
 ## [Unreleased]
 ### Added
-- New option: `closePrecedes` (default `true` allows `cookiebanner-close` follow the `span` element with the message)
+- n/a
 
 ### Changed
 - n/a
 
 ### Fixed
+- n/a
+
+## [1.2.1](https://github.com/dobarkod/cookie-banner/compare/1.2.0...1.2.1) - 2017-10-26
+### Added
+- New option: `close-precedes` (defaults to `true`, keeping backwards compatibility) -- allows controlling whether `.cookiebanner-close` element follows or precedes the `<span>` containing the message
+
+### Fixed
 - Tightened up some loose ends in tests
 - Added some more eslint rules
+- Upgraded eslint dev dependency to ~4.8.0
 
 ## [1.2.0](https://github.com/dobarkod/cookie-banner/compare/1.1.1...1.2.0) - 2017-08-01
 ### Added

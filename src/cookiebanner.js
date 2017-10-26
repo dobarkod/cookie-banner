@@ -302,6 +302,7 @@ THE SOFTWARE.
             // TODO: parse/validate other options that can benefit
             this.options.zindex = parseInt(this.options.zindex, 10);
             this.options.mask = Utils.str2bool(this.options.mask);
+            this.options.closePrecedes = Utils.str2bool(this.options.closePrecedes);
 
             // check for a possible global callback specified as a string
             if ('string' === typeof this.options.expires) {
@@ -442,10 +443,10 @@ THE SOFTWARE.
                 this.options.closeText + '</div>';
             var messageHtml = '<span>' + this.options.message + (this.options.linkmsg ? ' <a>' + this.options.linkmsg + '</a>' : '') + '</span>';
 
-            if ('false' === this.options.closePrecedes) {
-                el.innerHTML = messageHtml + closeHtml;
-            } else {
+            if (this.options.closePrecedes) {
                 el.innerHTML = closeHtml + messageHtml;
+            } else {
+                el.innerHTML = messageHtml + closeHtml;
             }
 
             this.element = el;

@@ -156,6 +156,44 @@ QUnit.test('rel opener noreferrer option', function(assert) {
     assert.deepEqual(this.banner.options.moreinfoRel, false, 'rel="noopener noreferrer" is overridden');
 });
 
+QUnit.test('close-precedes option parsing', function(assert) {
+    this.banner = new Cookiebanner();
+    assert.deepEqual(this.banner.options.closePrecedes, true, 'closePrecedes defaults to true');
+    this.banner = new Cookiebanner({closePrecedes: null});
+    assert.deepEqual(this.banner.options.closePrecedes, true, 'closePrecedes is true when explicitly set as null');
+    this.banner = new Cookiebanner({closePrecedes: ''});
+    assert.deepEqual(this.banner.options.closePrecedes, false, 'closePrecedes is false when specified as empty string');
+    this.banner = new Cookiebanner({closePrecedes: false});
+    assert.deepEqual(this.banner.options.closePrecedes, false, 'closePrecedes is false when given as false');
+    this.banner = new Cookiebanner({closePrecedes: 'false'});
+    assert.deepEqual(this.banner.options.closePrecedes, false, 'closePrecedes is false when given as "false"');
+});
+
+QUnit.test('close-precedes option actually builds different markup', function(assert) {
+    // Default/true closePrecedes creates .cookiebanner-close as firstChild of .cookiebanner
+    this.banner = new Cookiebanner({closePrecedes: true});
+    this.banner.insert();
+
+    assert.strictEqual(this.banner.inserted, true);
+    var el = document.querySelector('.cookiebanner');
+    assert.strictEqual(el.firstChild.className, 'cookiebanner-close', '.cookiebanner-close is the first child of .cookiebanner');
+    assert.strictEqual(el.lastChild.tagName.toLowerCase(), 'span', '<span> is the last child of .cookiebanner');
+
+    this.banner.cleanup();
+
+    // False closePrecedes reverses the above
+    this.banner = new Cookiebanner({closePrecedes: false});
+    this.banner.insert();
+
+    assert.strictEqual(this.banner.inserted, true);
+    var el = document.querySelector('.cookiebanner');
+    assert.strictEqual(el.firstChild.tagName.toLowerCase(), 'span', '<span> is the first child of .cookiebanner');
+    assert.strictEqual(el.lastChild.className, 'cookiebanner-close', '.cookiebanner-close is the last child of .cookiebanner');
+
+    this.banner.cleanup();
+});
+
+
 QUnit.module('Invocations', {
     setup: function(){},
     teardown: function(){}

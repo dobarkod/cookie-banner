@@ -438,20 +438,15 @@ THE SOFTWARE.
                 el.style.bottom = 0;
             }
 
-
             var closeHtml = '<div class="cookiebanner-close" style="' + this.options.closeStyle + '">' +
                 this.options.closeText + '</div>';
             var messageHtml = '<span>' + this.options.message + (this.options.linkmsg ? ' <a>' + this.options.linkmsg + '</a>' : '') + '</span>';
 
-            if ( this.options.closePrecedes === 'false' )
-            {
-              el.innerHTML = messageHtml + closeHtml;
+            if ('false' === this.options.closePrecedes) {
+                el.innerHTML = messageHtml + closeHtml;
+            } else {
+                el.innerHTML = closeHtml + messageHtml;
             }
-            else
-            {
-              el.innerHTML = closeHtml + messageHtml;
-            }
-
 
             this.element = el;
 

@@ -16,6 +16,12 @@
     "url": "https://github.com/dobarkod/cookie-banner/issues"
   },
   "license": "MIT",
+  "scripts": {
+    "preversion": "npm test",
+    "version": "make clean && make && git add -A dist",
+    "push": "git push && git push origin --tags",
+    "test": "make test"
+  },
   "dependencies": {},
   "devDependencies": {
     "eslint": "~4.8.0",

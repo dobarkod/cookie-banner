@@ -18,6 +18,13 @@ module.exports = {
         "no-multi-spaces": "error",
         "no-redeclare": "error",
         "no-self-assign": "error",
-        "no-useless-return": "error"
+        "no-useless-return": "error",
+        "brace-style": [
+            "error",
+            "1tbs",
+            {
+                "allowSingleLine": true
+            }
+        ]
     }
 };

@@ -234,7 +234,6 @@ THE SOFTWARE.
 
             this.inserted = false;
             this.closed = false;
-            this.test_mode = false; // TODO: implement
 
             var default_text = 'We use cookies to enhance your experience. ' +
                 'By continuing to visit this site you agree to our use of cookies.';
@@ -386,7 +385,9 @@ THE SOFTWARE.
         },
 
         agree_and_close:function() {
-            this.agree();
+            if (!this.options.debug) {
+                this.agree();
+            }
             return this.close();
         },
 

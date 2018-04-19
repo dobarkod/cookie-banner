@@ -214,6 +214,16 @@ QUnit.test('Inserted automatically if called via <script id="cookiebanner"> + cl
     });
 });
 
+QUnit.test('Testing debug option', function(assert) {
+    var opts = {
+        debug: true
+    };
+    var banner = new Cookiebanner(opts);
+    banner.agree_and_close();
+    var hasCookie = Cookies.has('cookiebanner-accepted');
+    assert.strictEqual(hasCookie, false, 'the cookie is not present');
+});
+
 QUnit.test('Not inserted automatically unless called with <script id="cookiebanner"...>', function(assert){
     stop();
     inject_script(script_src, 'different-on-purpose', {}, 'head', function(){
@@ -222,7 +232,6 @@ QUnit.test('Not inserted automatically unless called with <script id="cookiebann
     });
     remove_el('different-on-purpose');
 });
-
 
 QUnit.module('Cookies');
 

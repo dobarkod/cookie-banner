@@ -8,6 +8,7 @@
 - n/a
 
 ### Fixed
+- Empty `linkmsg` option does not throw an error now
 
 ## [1.2.2](https://github.com/dobarkod/cookie-banner/compare/1.2.1...1.2.2) - 2018-04-19
 ### Fixed

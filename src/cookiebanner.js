@@ -453,17 +453,19 @@ THE SOFTWARE.
             this.element = el;
 
             var el_a = el.getElementsByTagName('a')[0];
-            el_a.href = this.options.moreinfo;
-            el_a.target = this.options.moreinfoTarget;
-            if (this.options.moreinfoRel && '' !== this.options.moreinfoRel) {
-                el_a.rel = this.options.moreinfoRel;
-            }
-            el_a.style.textDecoration = this.options.moreinfoDecoration;
-            el_a.style.color = this.options.link;
-            el_a.style.fontWeight = this.options.moreinfoFontWeight;
+            if (el_a) {
+                el_a.href = this.options.moreinfo;
+                el_a.target = this.options.moreinfoTarget;
+                if (this.options.moreinfoRel && '' !== this.options.moreinfoRel) {
+                    el_a.rel = this.options.moreinfoRel;
+                }
+                el_a.style.textDecoration = this.options.moreinfoDecoration;
+                el_a.style.color = this.options.link;
+                el_a.style.fontWeight = this.options.moreinfoFontWeight;
 
-            if ('' !== this.options.moreinfoFontSize) {
-                el_a.style.fontSize = this.options.moreinfoFontSize;
+                if ('' !== this.options.moreinfoFontSize) {
+                    el_a.style.fontSize = this.options.moreinfoFontSize;
+                }
             }
 
             var el_x = el.getElementsByTagName('div')[0];

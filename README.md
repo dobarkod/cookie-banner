@@ -17,13 +17,13 @@ Add a single line to your web page, just before the closing `</body>` tag:
 
 ```html
 <script type="text/javascript" id="cookiebanner"
-  src="https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner@1.2.1/dist/cookiebanner.min.js"></script>
+  src="https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner@1.2.2/dist/cookiebanner.min.js"></script>
 ```
 
 or via [cdnjs](https://cdnjs.com/):
 ```html
 <script type="text/javascript" id="cookiebanner"
-  src="https://cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.2.1/cookiebanner.min.js"></script>
+  src="https://cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.2.2/cookiebanner.min.js"></script>
 ```
 
 This will display a black-and-white floating banner at the bottom of your
@@ -73,12 +73,13 @@ style. The following options are settable through a `data-` property on the
 * `accept-on-click` - When `true`, agrees and closes the notice when clicking anywhere on the page. (default: `false`)
 * `accept-on-first-visit` - When `true`, agrees automatically (which stops showing the notice for subsequent requests), but the notice is not automatically closed. (default: `false`)
 * `accept-on-timeout` - Automatically agrees and closes the notice after specified number of milliseconds. (default: `null`)
+* `debug` - When `true`, closes the banner without setting the cookie (default: `false`)
 
 Here's an example:
 
 ```html
 <script type="text/javascript" id="cookiebanner"
-    src="https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner@1.2.1/dist/cookiebanner.min.js"
+    src="https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner@1.2.2/dist/cookiebanner.min.js"
     data-height="20px" data-position="top"
     data-message="We use cookies to improve your browsing experience.">
 </script>

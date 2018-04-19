@@ -8,7 +8,10 @@
 - n/a
 
 ### Fixed
-- n/a
+
+## [1.2.2](https://github.com/dobarkod/cookie-banner/compare/1.2.1...1.2.2) - 2018-04-19
+### Fixed
+- Debug option works now (closes banner without setting the cookie)
 
 ## [1.2.1](https://github.com/dobarkod/cookie-banner/compare/1.2.0...1.2.1) - 2017-10-26
 ### Added

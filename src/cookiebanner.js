@@ -276,7 +276,9 @@ THE SOFTWARE.
                 acceptOnScroll: false,
                 acceptOnClick: false,
                 acceptOnTimeout: null,
-                acceptOnFirstVisit: false
+                acceptOnFirstVisit: false,
+                insertedHandler: null,
+                closedHandler: null
             };
 
             this.options = this.default_options;
@@ -377,6 +379,10 @@ THE SOFTWARE.
                         this.element_mask.parentNode.removeChild(this.element_mask);
                     }
                     this.closed = true;
+
+                    if (this.options.closedHandler) {
+                      this.options.closedHandler();
+                    }
                 }
             }/* else {
                 throw new Error("Not inserted but closing?!");
@@ -518,6 +524,10 @@ THE SOFTWARE.
 
             doc.body.appendChild(this.element);
             this.inserted = true;
+
+            if (this.options.insertedHandler) {
+              this.options.insertedHandler(this.element);
+            }
 
             if ('fade' === this.options.effect) {
                 this.element.style.opacity = 0;

@@ -156,11 +156,13 @@ THE SOFTWARE.
         },
         
         fade_out: function(el, speed) {
-            el.style.opacity = 1; 
-            var seconds = speed/1000;
-            el.style.transition = "opacity "+seconds+"s ease";
-            el.style.opacity = 0;
-            setTimeout(function() { el.parentNode.removeChild(el); }, speed);
+            if(typeof(el) !== "undefined") {
+                el.style.opacity = 1; 
+                var seconds = speed/1000;
+                el.style.transition = "opacity "+seconds+"s ease";
+                el.style.opacity = 0;
+                setTimeout(function() { el.parentNode.removeChild(el); }, speed);
+            }
         },
 
         get_data_attribs: function(script) {

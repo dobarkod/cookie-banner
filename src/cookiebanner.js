@@ -276,7 +276,8 @@ THE SOFTWARE.
                 acceptOnScroll: false,
                 acceptOnClick: false,
                 acceptOnTimeout: null,
-                acceptOnFirstVisit: false
+                acceptOnFirstVisit: false,
+                sleepBeforeClose: null
             };
 
             this.options = this.default_options;
@@ -388,7 +389,12 @@ THE SOFTWARE.
             if (!this.options.debug) {
                 this.agree();
             }
-            return this.close();
+            if (this.options.sleepBeforeClose && !isNaN(parseFloat(this.options.sleepBeforeClose)) && isFinite(this.options.sleepBeforeClose)) {
+                var self_ = this;
+                setTimeout(function() { self_.close(); }, this.options.sleepBeforeClose);
+            } else {
+                return this.close();
+            }
         },
 
         // close and remove every trace of ourselves completely

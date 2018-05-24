@@ -155,15 +155,12 @@ THE SOFTWARE.
             }
         },
         
-        fade_out: function(el) {
+        fade_out: function(el, speed) {
             el.style.opacity = 1; 
-            var tick = function() {
-                el.style.opacity = +el.style.opacity - 0.01;
-                if (+el.style.opacity > 0) {
-                    (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16)
-                }
-            };
-            tick();
+            var seconds = speed/1000;
+            el.style.transition = "opacity "+seconds+"s ease";
+            el.style.opacity = 0;
+            setTimeout(function() { el.parentNode.removeChild(el); }, speed);
         },
 
         get_data_attribs: function(script) {
@@ -380,7 +377,7 @@ THE SOFTWARE.
 
         close: function() {
             if ('fade' === this.options.effect) {
-                Utils.fade_out(this.element);
+                Utils.fade_out(this.element, 2000);
                 this.closed = true;
             } else {
                 if (this.inserted) {

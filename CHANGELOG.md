@@ -2,7 +2,8 @@
 
 ## [Unreleased]
 ### Added
-- n/a
+- New option: `delay-before-close` (default: `null`), allows delaying the notice
+closing by the specified number of milliseconds
 
 ### Changed
 - n/a

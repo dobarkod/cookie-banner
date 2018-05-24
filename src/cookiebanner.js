@@ -277,7 +277,7 @@ THE SOFTWARE.
                 acceptOnClick: false,
                 acceptOnTimeout: null,
                 acceptOnFirstVisit: false,
-                sleepBeforeClose: null
+                delayBeforeClose: null
             };
 
             this.options = this.default_options;
@@ -389,9 +389,9 @@ THE SOFTWARE.
             if (!this.options.debug) {
                 this.agree();
             }
-            if (this.options.sleepBeforeClose && !isNaN(parseFloat(this.options.sleepBeforeClose)) && isFinite(this.options.sleepBeforeClose)) {
+            if (this.options.delayBeforeClose && !isNaN(parseFloat(this.options.delayBeforeClose)) && isFinite(this.options.delayBeforeClose)) {
                 var self_ = this;
-                setTimeout(function() { self_.close(); }, this.options.sleepBeforeClose);
+                setTimeout(function() { self_.close(); }, this.options.delayBeforeClose);
             } else {
                 return this.close();
             }

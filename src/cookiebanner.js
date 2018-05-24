@@ -132,15 +132,6 @@ THE SOFTWARE.
             }
             return obj;
         },
-        
-        sleep: function(milliseconds) {
-            var start = new Date().getTime();
-            for (var i = 0; i < 1e7; i++) {
-                if ((new Date().getTime() - start) > milliseconds){
-                    break;
-                }
-            }
-        },
 
         str2bool: function(str) {
             str = String(str);
@@ -399,9 +390,11 @@ THE SOFTWARE.
                 this.agree();
             }
             if (this.options.sleepBeforeClose && !isNaN(parseFloat(this.options.sleepBeforeClose)) && isFinite(this.options.sleepBeforeClose)) {
-                    Utils.sleep(this.options.sleepBeforeClose);
+                var self_ = this;
+                setTimeout(function() { self_.close(); }, this.options.sleepBeforeClose);
+            } else {
+                return this.close();
             }
-            return this.close();
         },
 
         // close and remove every trace of ourselves completely

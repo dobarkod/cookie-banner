@@ -154,6 +154,17 @@ THE SOFTWARE.
                 }, 50);
             }
         },
+        
+        fade_out: function(el) {
+            el.style.opacity = 1; 
+            var tick = function() {
+                el.style.opacity = +el.style.opacity - 0.01;
+                if (+el.style.opacity > 0) {
+                    (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16)
+                }
+            };
+            tick();
+        },
 
         get_data_attribs: function(script) {
             var data = {};
@@ -368,19 +379,24 @@ THE SOFTWARE.
         },
 
         close: function() {
-            if (this.inserted) {
-                if (!this.closed) {
-                    if (this.element) {
-                        this.element.parentNode.removeChild(this.element);
+            if ('fade' === this.options.effect) {
+                Utils.fade_out(this.element);
+                this.closed = true;
+            } else {
+                if (this.inserted) {
+                    if (!this.closed) {
+                        if (this.element) {
+                            this.element.parentNode.removeChild(this.element);
+                        }
+                        if (this.element_mask) {
+                            this.element_mask.parentNode.removeChild(this.element_mask);
+                        }
+                        this.closed = true;
                     }
-                    if (this.element_mask) {
-                        this.element_mask.parentNode.removeChild(this.element_mask);
-                    }
-                    this.closed = true;
-                }
-            }/* else {
-                throw new Error("Not inserted but closing?!");
-            }*/
+                }/* else {
+                    throw new Error("Not inserted but closing?!");
+                }*/
+            }
             return this.closed;
         },
 

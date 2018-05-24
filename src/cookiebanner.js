@@ -132,6 +132,15 @@ THE SOFTWARE.
             }
             return obj;
         },
+        
+        sleep: function(milliseconds) {
+            var start = new Date().getTime();
+            for (var i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > milliseconds){
+                    break;
+                }
+            }
+        },
 
         str2bool: function(str) {
             str = String(str);
@@ -276,7 +285,8 @@ THE SOFTWARE.
                 acceptOnScroll: false,
                 acceptOnClick: false,
                 acceptOnTimeout: null,
-                acceptOnFirstVisit: false
+                acceptOnFirstVisit: false,
+                sleepBeforeClose: null
             };
 
             this.options = this.default_options;
@@ -387,6 +397,9 @@ THE SOFTWARE.
         agree_and_close:function() {
             if (!this.options.debug) {
                 this.agree();
+            }
+            if (this.options.sleepBeforeClose && !isNaN(parseFloat(this.options.sleepBeforeClose)) && isFinite(this.options.sleepBeforeClose)) {
+                    Utils.sleep(this.options.sleepBeforeClose);
             }
             return this.close();
         },

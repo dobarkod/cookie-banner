@@ -224,6 +224,32 @@ QUnit.test('Testing debug option', function(assert) {
     assert.strictEqual(hasCookie, false, 'the cookie is not present');
 });
 
+QUnit.test('Testing on-inserted handler', function(assert) {
+    var handlerGotExecuted = false
+    var opts = {
+        onInserted: (el) => {
+          handlerGotExecuted = true
+        }
+    };
+    var banner = new Cookiebanner(opts);
+    banner.insert();
+    banner.agree_and_close();
+    assert.strictEqual(handlerGotExecuted, true, "Handler didn't execute or banner was not inserted.");
+});
+
+QUnit.test('Testing on-closed handler', function(assert) {
+    var handlerGotExecuted = false
+    var opts = {
+        onClosed: (el) => {
+          handlerGotExecuted = true
+        }
+    };
+    var banner = new Cookiebanner(opts);
+    banner.insert();
+    banner.agree_and_close();
+    assert.strictEqual(handlerGotExecuted, true, "Handler didn't execute or banner was inserted/closed.");
+});
+
 QUnit.test('Empty linkmsg option does not throw an error', function(assert) {
     var opts = {
         linkmsg: ''

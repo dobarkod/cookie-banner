@@ -167,7 +167,9 @@ THE SOFTWARE.
                         var attr = attribs[key];
                         if (/^data-/.test(attr.name)) {
                             var camelized = Utils.camelize(attr.name.substr(5));
-                            data[camelized] = attr.value;
+                            var isFunction = camelized.startsWith('on');
+
+                            data[camelized] = isFunction ? eval(attr.value) : attr.value;
                         }
                     }
                 }
@@ -277,8 +279,8 @@ THE SOFTWARE.
                 acceptOnClick: false,
                 acceptOnTimeout: null,
                 acceptOnFirstVisit: false,
-                insertedHandler: null,
-                closedHandler: null
+                onInserted: null,
+                onClosed: null
             };
 
             this.options = this.default_options;
@@ -380,8 +382,9 @@ THE SOFTWARE.
                     }
                     this.closed = true;
 
-                    if (this.options.closedHandler) {
-                      this.options.closedHandler();
+                    var handler = this.options.onClosed
+                    if (handler && typeof handler === 'function') {
+                      handler();
                     }
                 }
             }/* else {
@@ -525,8 +528,9 @@ THE SOFTWARE.
             doc.body.appendChild(this.element);
             this.inserted = true;
 
-            if (this.options.insertedHandler) {
-              this.options.insertedHandler(this.element);
+            var handler = this.options.onInserted
+            if (handler && typeof handler === 'function') {
+              handler();
             }
 
             if ('fade' === this.options.effect) {

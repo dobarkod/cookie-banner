@@ -6,6 +6,8 @@
 closing by the specified number of milliseconds
 - New option: `fade-out-duration-ms` (default: `2000`), allows specifying the
 fade out duration (in milliseconds)
+- `expires` option now handles simple numeric strings as "expires in X number of
+seconds from now"
 
 ### Changed
 - `data-effect="fade"` or `effect: 'fade'` now applies when the notice is closed

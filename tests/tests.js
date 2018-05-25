@@ -147,6 +147,16 @@ QUnit.test('Options override / merge / normalization', function(assert) {
     banner.cleanup();
 });
 
+QUnit.test('expires option as a number/numeric', function(assert) {
+    var banner = new Cookiebanner({expires: "10"});
+    assert.strictEqual(typeof banner.options.expires, 'number', 'expires option is of number type');
+    assert.strictEqual(banner.options.expires, 10, 'numeric string converted to number');
+
+    var banner = new Cookiebanner({expires: "7890000"});
+    assert.strictEqual(typeof banner.options.expires, 'number', 'expires option is of number type');
+    assert.strictEqual(banner.options.expires, 7890000, 'numeric string converted to number');
+});
+
 QUnit.test('rel opener noreferrer option', function(assert) {
     this.banner = new Cookiebanner();
     assert.deepEqual(this.banner.options.moreinfoRel, 'noopener noreferrer', 'moreinfoRel option defaults to "noopener noreferrer"');

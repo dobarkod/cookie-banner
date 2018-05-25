@@ -56,7 +56,9 @@ style. The following options are settable through a `data-` property on the
 * `effect` - Effect used when inserting the notice, currently only `fade` is supported (triggered when cookiebanner is displayed and when it is closed) (default: `null`)
 * `fade-out-duration-ms` - Duration in milliseconds of fade-out effect (only if `fade` effect is specified, default: `2000`)
 * `cookie` - Name for the cookie that stores acceptance info (default: `cookiebanner-accepted`)
-* `expires` - Cookie expiry date/time (defaults to `Infinity` aka `Fri, 31 Dec 9999 23:59:59 GMT`). There's basic support for specifying a callback function (more flexibility, must return one of `Number`, `String`, or `Date` -- see `Cookies.set()`). You can also just specify a valid UTC string.
+* `expires` - Cookie expiry date/time (defaults to `Infinity` aka `Fri, 31 Dec 9999 23:59:59 GMT`). There's basic support for specifying a callback function (more flexibility, must return one of `Number`, `String`, or `Date` -- see `Cookies.set()`). You can also just specify a valid UTC string. When specified as a "numeric string", it is treated as number of seconds
+from now. So, `expires: '90'` or `data-expires="90"` would expire the cookie in 90
+seconds.
 * `cookie-path` - Path to set for the cookie
 * `cookie-domain` - Set a custom cookie domain (default: `null`)
 * `cookie-secure` - Set (`true`/`false`) secure cookie for HTTPS (default: `false`)

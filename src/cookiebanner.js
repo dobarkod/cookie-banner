@@ -154,14 +154,14 @@ THE SOFTWARE.
                 }, 50);
             }
         },
-        
-        fade_out: function(el, speed) {
-            if(typeof(el) !== "undefined") {
-                el.style.opacity = 1; 
-                var seconds = speed/1000;
-                el.style.transition = "opacity "+seconds+"s ease";
+
+        fade_out: function(el, duration_ms) {
+            if (typeof(el) !== "undefined") {
+                el.style.opacity = 1;
+                var seconds = duration_ms / 1000;
+                el.style.transition = "opacity " + seconds + "s ease";
                 el.style.opacity = 0;
-                setTimeout(function() { el.parentNode.removeChild(el); }, speed);
+                setTimeout(function() { el.parentNode.removeChild(el); }, duration_ms);
             }
         },
 
@@ -287,7 +287,8 @@ THE SOFTWARE.
                 acceptOnClick: false,
                 acceptOnTimeout: null,
                 acceptOnFirstVisit: false,
-                delayBeforeClose: null
+                delayBeforeClose: null,
+                fadeOutDurationMs: 2000
             };
 
             this.options = this.default_options;
@@ -380,7 +381,7 @@ THE SOFTWARE.
 
         close: function() {
             if ('fade' === this.options.effect) {
-                Utils.fade_out(this.element, 2000);
+                Utils.fade_out(this.element, this.options.fadeOutDurationMs);
                 this.closed = true;
             } else {
                 if (this.inserted) {

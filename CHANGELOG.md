@@ -8,6 +8,9 @@ closing by the specified number of milliseconds
 fade out duration (in milliseconds)
 - `expires` option now handles simple numeric strings as "expires in X number of
 seconds from now"
+- New options/callbacks: `on-inserted`, `on-closed` (default: `null`) -- see
+[README](https://github.com/dobarkod/cookie-banner/blob/master/README.md) for
+more details
 
 ### Changed
 - `data-effect="fade"` or `effect: 'fade'` now applies when the notice is closed

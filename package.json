@@ -20,7 +20,8 @@
     "preversion": "npm test",
     "version": "make clean && make && git add -A dist",
     "push": "git push && git push origin --tags",
-    "test": "make test"
+    "test": "make test",
+    "make": "make"
   },
   "dependencies": {},
   "devDependencies": {

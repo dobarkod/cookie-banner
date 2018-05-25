@@ -234,6 +234,34 @@ QUnit.test('Testing debug option', function(assert) {
     assert.strictEqual(hasCookie, false, 'the cookie is not present');
 });
 
+QUnit.test('Testing on-inserted handler', function(assert) {
+    var handlerGotExecuted = false;
+    var opts = {
+        onInserted: function(obj) {
+            handlerGotExecuted = true;
+            assert.ok(obj instanceof Cookiebanner, 'onInserted handler got passed the banner instance.')
+        }
+    };
+    var banner = new Cookiebanner(opts);
+    banner.insert();
+    banner.agree_and_close();
+    assert.strictEqual(handlerGotExecuted, true, "Handler didn't execute or banner was not inserted.");
+});
+
+QUnit.test('Testing on-closed handler', function(assert) {
+    var handlerGotExecuted = false;
+    var opts = {
+        onClosed: function(obj) {
+            handlerGotExecuted = true;
+            assert.ok(obj instanceof Cookiebanner, 'onInserted handler got passed the banner instance.')
+        }
+    };
+    var banner = new Cookiebanner(opts);
+    banner.insert();
+    banner.agree_and_close();
+    assert.strictEqual(handlerGotExecuted, true, "Handler didn't execute or banner was inserted/closed.");
+});
+
 QUnit.test('Empty linkmsg option does not throw an error', function(assert) {
     var opts = {
         linkmsg: ''
@@ -249,9 +277,10 @@ QUnit.test('Delay before close option', function(assert) {
         delayBeforeClose: 3000
     };
     var banner = new Cookiebanner(opts);
+    banner.insert();
     banner.agree_and_close();
     assert.strictEqual(banner.closed, false, 'still not closed fully due to delay');
-    setTimeout(function(){
+    setTimeout(function() {
         assert.strictEqual(banner.closed, true, 'closed after delay passed');
         start();
     }, 4000);

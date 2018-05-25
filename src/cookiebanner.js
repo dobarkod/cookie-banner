@@ -177,7 +177,9 @@ THE SOFTWARE.
                         var attr = attribs[key];
                         if (/^data-/.test(attr.name)) {
                             var camelized = Utils.camelize(attr.name.substr(5));
-                            data[camelized] = attr.value;
+                            var isFunction = camelized.startsWith('on');
+
+                            data[camelized] = isFunction ? eval(attr.value) : attr.value; // jshint ignore:line
                         }
                     }
                 }
@@ -292,6 +294,8 @@ THE SOFTWARE.
                 acceptOnClick: false,
                 acceptOnTimeout: null,
                 acceptOnFirstVisit: false,
+                onInserted: null,
+                onClosed: null,
                 delayBeforeClose: null,
                 fadeOutDurationMs: 2000
             };
@@ -405,10 +409,16 @@ THE SOFTWARE.
                         }
                         this.closed = true;
                     }
-                }/* else {
-                    throw new Error("Not inserted but closing?!");
-                }*/
-            }
+                    this.closed = true;
+
+                    var handler = this.options.onClosed;
+                    if (handler && typeof handler === 'function') {
+                        handler(this);
+                    }
+                }
+            }/* else {
+                throw new Error("Not inserted but closing?!");
+            }*/
             return this.closed;
         },
 
@@ -551,6 +561,11 @@ THE SOFTWARE.
 
             doc.body.appendChild(this.element);
             this.inserted = true;
+
+            var handler = this.options.onInserted;
+            if (handler && typeof handler === 'function') {
+                handler(this);
+            }
 
             if ('fade' === this.options.effect) {
                 this.element.style.opacity = 0;

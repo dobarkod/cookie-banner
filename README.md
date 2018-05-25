@@ -76,6 +76,8 @@ seconds.
 * `accept-on-click` - When `true`, agrees and closes the notice when clicking anywhere on the page. (default: `false`)
 * `accept-on-first-visit` - When `true`, agrees automatically (which stops showing the notice for subsequent requests), but the notice is not automatically closed. (default: `false`)
 * `accept-on-timeout` - Automatically agrees and closes the notice after specified number of milliseconds. (default: `null`)
+* `on-inserted` - A function which gets executed after the banner is inserted in the DOM (default: `null`)
+* `on-closed` - A function which gets executed after the banner is closed (default: `null`)
 * `delay-before-close` - Wait N milliseconds before closing the notice. (default: `null`)
 * `debug` - When `true`, closes the banner without setting the cookie (default: `false`)
 
@@ -131,6 +133,30 @@ further modify the banner appearance.
 You can also try customizing the close button via the `.cookiebanner-close` CSS class.
 Keep in mind that you might have to override and/or reset certain properties by using `!important` CSS rules.
 
+
+## Event-Handlers (Callbacks)
+
+There are two ways you can utilize event handlers like i.e. `on-inserted`.
+
+Within JS (recommended):
+
+```html
+<script type="text/javascript">
+      var options = { onInserted: function (instance) { console.log('Hey, I got inserted!') } };
+      var cb = new Cookiebanner(options); cb.run();
+</script>
+```
+
+As a `data`-attribute:
+
+```html
+<script type="text/javascript" id="cookiebanner"
+    src="https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner/dist/cookiebanner.min.js"
+    data-on-inserted="function (instance) { console.log('Hey, I got inserted!'); }">
+</script>
+```
+
+
 ## Hacking
 
 Get the newest and the freshest from GitHub:
@@ -149,7 +175,7 @@ make test  # run the tests
 make # minify it
 ```
 
-You'll need `jshint`, `eslint` and `uglifyjs` tools installed for this, and also
+You'll need `jshint`, `eslint` and `uglifyjs` (v2) tools installed for this, and also
 `phantomjs` if you want to run the automated tests.
 
 Pull requests are welcome! In order to get your pull-request accepted,

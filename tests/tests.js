@@ -258,6 +258,21 @@ QUnit.test('Empty linkmsg option does not throw an error', function(assert) {
     assert.ok(true, 'empty linkmsg option did not throw an error');
 });
 
+QUnit.test('Delay before close option', function(assert) {
+    stop();
+    var opts = {
+        linkmsg: '',
+        delayBeforeClose: 3000
+    };
+    var banner = new Cookiebanner(opts);
+    banner.agree_and_close();
+    assert.strictEqual(banner.closed, false, 'still not closed fully due to delay');
+    setTimeout(function(){
+        assert.strictEqual(banner.closed, true, 'closed after delay passed');
+        start();
+    }, 4000);
+});
+
 QUnit.test('Not inserted automatically unless called with <script id="cookiebanner"...>', function(assert){
     stop();
     inject_script(script_src, 'different-on-purpose', {}, 'head', function(){

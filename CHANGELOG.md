@@ -2,10 +2,14 @@
 
 ## [Unreleased]
 ### Added
-- n/a
+- New option: `delay-before-close` (default: `null`), allows delaying the notice
+closing by the specified number of milliseconds
+- New option: `fade-out-duration-ms` (default: `2000`), allows specifying the
+fade out duration (in milliseconds)
 
 ### Changed
-- n/a
+- `data-effect="fade"` or `effect: 'fade'` now applies when the notice is closed
+too (meaning the notice now fades out when closing, if/when it was faded in)
 
 ### Fixed
 - Empty `linkmsg` option does not throw an error now

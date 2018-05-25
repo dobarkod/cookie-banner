@@ -155,6 +155,16 @@ THE SOFTWARE.
             }
         },
 
+        fade_out: function(el, duration_ms) {
+            if (typeof(el) !== "undefined") {
+                el.style.opacity = 1;
+                var seconds = duration_ms / 1000;
+                el.style.transition = "opacity " + seconds + "s ease";
+                el.style.opacity = 0;
+                setTimeout(function() { el.parentNode.removeChild(el); }, duration_ms);
+            }
+        },
+
         get_data_attribs: function(script) {
             var data = {};
             if (Object.prototype.hasOwnProperty.call(script, 'dataset')) {
@@ -280,7 +290,9 @@ THE SOFTWARE.
                 acceptOnTimeout: null,
                 acceptOnFirstVisit: false,
                 onInserted: null,
-                onClosed: null
+                onClosed: null,
+                delayBeforeClose: null,
+                fadeOutDurationMs: 2000
             };
 
             this.options = this.default_options;
@@ -372,13 +384,19 @@ THE SOFTWARE.
         },
 
         close: function() {
-            if (this.inserted) {
-                if (!this.closed) {
-                    if (this.element) {
-                        this.element.parentNode.removeChild(this.element);
-                    }
-                    if (this.element_mask) {
-                        this.element_mask.parentNode.removeChild(this.element_mask);
+            if ('fade' === this.options.effect) {
+                Utils.fade_out(this.element, this.options.fadeOutDurationMs);
+                this.closed = true;
+            } else {
+                if (this.inserted) {
+                    if (!this.closed) {
+                        if (this.element) {
+                            this.element.parentNode.removeChild(this.element);
+                        }
+                        if (this.element_mask) {
+                            this.element_mask.parentNode.removeChild(this.element_mask);
+                        }
+                        this.closed = true;
                     }
                     this.closed = true;
 
@@ -397,7 +415,13 @@ THE SOFTWARE.
             if (!this.options.debug) {
                 this.agree();
             }
-            return this.close();
+            if (this.options.
+                Close && !isNaN(parseFloat(this.options.delayBeforeClose)) && isFinite(this.options.delayBeforeClose)) {
+                var self_ = this;
+                setTimeout(function() { self_.close(); }, this.options.delayBeforeClose);
+            } else {
+                return this.close();
+            }
         },
 
         // close and remove every trace of ourselves completely

@@ -179,7 +179,7 @@ THE SOFTWARE.
                             var camelized = Utils.camelize(attr.name.substr(5));
                             var isFunction = camelized.startsWith('on');
 
-                            data[camelized] = isFunction ? eval(attr.value) : attr.value;
+                            data[camelized] = isFunction ? eval(attr.value) : attr.value; // jshint ignore:line
                         }
                     }
                 }

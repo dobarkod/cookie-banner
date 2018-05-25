@@ -55,7 +55,7 @@ style. The following options are settable through a `data-` property on the
 * `text-align` - Text align/position for the .cookiebanner (container) element (default: `center`)
 * `effect` - Effect used when inserting the notice, currently only `fade` is supported (triggered when cookiebanner is displayed and when it is closed) (default: `null`)
 * `cookie` - Name for the cookie that stores acceptance info (default: `cookiebanner-accepted`)
-* `expires` - Cookie expiry date/time (defaults to `Infinity` aka `Fri, 31 Dec 9999 23:59:59 GMT`). There's basic support for specifying a callback function (more flexibility, must return one of `Number`, `String`, or `Date` -- see `Cookies.set()`). You can also just specify a valid UTC string.
+* `expires` - Cookie expiry date/time (defaults to `Infinity` aka `Fri, 31 Dec 9999 23:59:59 GMT`). There's basic support for specifying a callback function (more flexibility, must return one of `Number`, `String`, or `Date` -- see `Cookies.set()`). You can also just specify a valid UTC string. New examples: you can use data-expires="Thursday, August 28, 2018, 1:52:31 AM" for a custom expiration or data-expires="90" (this way it will calculate today + 90 days and write the correct cookie-friendly expiration date format.
 * `cookie-path` - Path to set for the cookie
 * `cookie-domain` - Set a custom cookie domain (default: `null`)
 * `cookie-secure` - Set (`true`/`false`) secure cookie for HTTPS (default: `false`)

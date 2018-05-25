@@ -154,6 +154,16 @@ THE SOFTWARE.
                 }, 50);
             }
         },
+        
+        fade_out: function(el, speed) {
+            if(typeof(el) !== "undefined") {
+                el.style.opacity = 1; 
+                var seconds = speed/1000;
+                el.style.transition = "opacity "+seconds+"s ease";
+                el.style.opacity = 0;
+                setTimeout(function() { el.parentNode.removeChild(el); }, speed);
+            }
+        },
 
         get_data_attribs: function(script) {
             var data = {};
@@ -369,19 +379,24 @@ THE SOFTWARE.
         },
 
         close: function() {
-            if (this.inserted) {
-                if (!this.closed) {
-                    if (this.element) {
-                        this.element.parentNode.removeChild(this.element);
+            if ('fade' === this.options.effect) {
+                Utils.fade_out(this.element, 2000);
+                this.closed = true;
+            } else {
+                if (this.inserted) {
+                    if (!this.closed) {
+                        if (this.element) {
+                            this.element.parentNode.removeChild(this.element);
+                        }
+                        if (this.element_mask) {
+                            this.element_mask.parentNode.removeChild(this.element_mask);
+                        }
+                        this.closed = true;
                     }
-                    if (this.element_mask) {
-                        this.element_mask.parentNode.removeChild(this.element_mask);
-                    }
-                    this.closed = true;
-                }
-            }/* else {
-                throw new Error("Not inserted but closing?!");
-            }*/
+                }/* else {
+                    throw new Error("Not inserted but closing?!");
+                }*/
+            }
             return this.closed;
         },
 

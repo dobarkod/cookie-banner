@@ -400,7 +400,7 @@ THE SOFTWARE.
                     }
                     this.closed = true;
 
-                    var handler = this.options.onClosed
+                    var handler = this.options.onClosed;
                     if (handler && typeof handler === 'function') {
                       handler();
                     }
@@ -551,7 +551,7 @@ THE SOFTWARE.
             doc.body.appendChild(this.element);
             this.inserted = true;
 
-            var handler = this.options.onInserted
+            var handler = this.options.onInserted;
             if (handler && typeof handler === 'function') {
               handler();
             }

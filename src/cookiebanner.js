@@ -92,11 +92,18 @@ THE SOFTWARE.
                         expires = end === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + end;
                         break;
                     case String:
-                        expires = '; expires=' + end;
-                    break;
+                        // If "end" is a number, e.g. data-expires="90"
+                        if(!isNaN(end)) {
+                            // Calculate today + N (end) days and save it as cookie-friendly date and time
+                            expires = '; expires=' + new Date(Date.now() + (end * 24 * 60 * 60 * 1000)).toUTCString();
+                        } else {
+                            // If "end" is a string, e.g. data-expires="Thursday, August 28, 2018, 1:52:31 AM"
+                            expires = '; expires=' + end;
+                        }
+                        break;
                     case Date:
                         expires = '; expires=' + end.toUTCString();
-                    break;
+                        break;
                 }
             }
             doc.cookie = encodeURIComponent(key) + '=' + encodeURIComponent(val) + expires + (domain ? '; domain=' + domain : '') + (path ? '; path=' + path : '') + (secure ? '; secure' : '');

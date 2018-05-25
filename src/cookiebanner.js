@@ -177,7 +177,8 @@ THE SOFTWARE.
                         var attr = attribs[key];
                         if (/^data-/.test(attr.name)) {
                             var camelized = Utils.camelize(attr.name.substr(5));
-                            var isFunction = camelized.startsWith('on');
+                            // True when option name starts with "on"
+                            var isFunction = (camelized.lastIndexOf('on', 0) === 0);
 
                             data[camelized] = isFunction ? eval(attr.value) : attr.value; // jshint ignore:line
                         }

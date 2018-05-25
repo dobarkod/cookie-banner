@@ -11,6 +11,8 @@ seconds from now"
 - New options/callbacks: `on-inserted`, `on-closed` (default: `null`) -- see
 [README](https://github.com/dobarkod/cookie-banner/blob/master/README.md) for
 more details
+- New option: `padding` (default: `5px 16px`), allows setting the padding for
+cases when one has no control over the site's CSS
 
 ### Changed
 - `data-effect="fade"` or `effect: 'fade'` now applies when the notice is closed

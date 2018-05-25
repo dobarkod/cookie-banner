@@ -45,7 +45,7 @@ style. The following options are settable through a `data-` property on the
 * `bg` - Banner/notice background color (default: `#000`)
 * `link` - Link text color (default: `#aaa`)
 * `position` - Banner/notice position, `top` or `bottom` (default: `bottom`)
-* `padding` - Set a custom padding (default: `5px 16px`)
+* `padding` - Set custom padding (default: `5px 16px`)
 * `message` - Notice message text
 * `linkmsg` - Link text content (default: `Learn more`)
 * `close-text` - Text/symbol for the `.cookiebanner-close` element (default: `&#10006;`)

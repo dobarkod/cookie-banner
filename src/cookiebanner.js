@@ -278,6 +278,7 @@ THE SOFTWARE.
                 fg: '#ddd',
                 link: '#aaa',
                 position: 'bottom',
+                padding: '5px 16px',
                 message: default_text,
                 linkmsg: default_link,
                 moreinfo: 'http://aboutcookies.org',
@@ -472,7 +473,7 @@ THE SOFTWARE.
             el.style.color = this.options.fg;
             el.style.lineHeight = el.style.minHeight;
 
-            el.style.padding = '5px 16px';
+            el.style.padding = this.options.padding;
 
             el.style.fontFamily = this.options.fontFamily;
             el.style.fontSize = this.options.fontSize;

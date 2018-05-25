@@ -415,8 +415,7 @@ THE SOFTWARE.
             if (!this.options.debug) {
                 this.agree();
             }
-            if (this.options.
-                Close && !isNaN(parseFloat(this.options.delayBeforeClose)) && isFinite(this.options.delayBeforeClose)) {
+            if (this.options.delayBeforeClose && !isNaN(parseFloat(this.options.delayBeforeClose)) && isFinite(this.options.delayBeforeClose)) {
                 var self_ = this;
                 setTimeout(function() { self_.close(); }, this.options.delayBeforeClose);
             } else {

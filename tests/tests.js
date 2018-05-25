@@ -265,9 +265,10 @@ QUnit.test('Delay before close option', function(assert) {
         delayBeforeClose: 3000
     };
     var banner = new Cookiebanner(opts);
+    banner.insert();
     banner.agree_and_close();
     assert.strictEqual(banner.closed, false, 'still not closed fully due to delay');
-    setTimeout(function(){
+    setTimeout(function() {
         assert.strictEqual(banner.closed, true, 'closed after delay passed');
         start();
     }, 4000);

@@ -320,7 +320,7 @@ THE SOFTWARE.
             this.options.mask = Utils.str2bool(this.options.mask);
             this.options.closePrecedes = Utils.str2bool(this.options.closePrecedes);
 
-			// check for a possible global callback specified as a string
+            // check for a possible global callback specified as a string
             if ('string' === typeof this.options.expires) {
                 if ('function' === typeof context[this.options.expires]) {
                     this.options.expires = context[this.options.expires];

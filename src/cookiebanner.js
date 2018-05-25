@@ -402,7 +402,7 @@ THE SOFTWARE.
 
                     var handler = this.options.onClosed;
                     if (handler && typeof handler === 'function') {
-                      handler();
+                        handler(this);
                     }
                 }
             }/* else {
@@ -553,7 +553,7 @@ THE SOFTWARE.
 
             var handler = this.options.onInserted;
             if (handler && typeof handler === 'function') {
-              handler();
+                handler(this);
             }
 
             if ('fade' === this.options.effect) {

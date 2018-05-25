@@ -132,7 +132,7 @@ You can also try customizing the close button via the `.cookiebanner-close` CSS 
 Keep in mind that you might have to override and/or reset certain properties by using `!important` CSS rules.
 
 
-## Event-Handlers
+## Event-Handlers (Callbacks)
 
 There are two ways you can utilize event handlers like i.e. `on-inserted`.
 
@@ -140,7 +140,7 @@ Within JS (recommended):
 
 ```html
 <script type="text/javascript">
-      var options = { onInserted: (el) => { console.log("Hey, I got inserted!") } };
+      var options = { onInserted: function (instance) { console.log('Hey, I got inserted!') } };
       var cb = new Cookiebanner(options); cb.run();
 </script>
 ```
@@ -149,8 +149,8 @@ As a `data`-attribute:
 
 ```html
 <script type="text/javascript" id="cookiebanner"
-    src="https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner@1.2.2/dist/cookiebanner.min.js"
-    data-on-inserted="(el) => { console.log('Hey, I got inserted!') }">
+    src="https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner/dist/cookiebanner.min.js"
+    data-on-inserted="function (instance) { console.log('Hey, I got inserted!'); }">
 </script>
 ```
 

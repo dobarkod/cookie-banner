@@ -225,10 +225,11 @@ QUnit.test('Testing debug option', function(assert) {
 });
 
 QUnit.test('Testing on-inserted handler', function(assert) {
-    var handlerGotExecuted = false
+    var handlerGotExecuted = false;
     var opts = {
-        onInserted: (el) => {
-          handlerGotExecuted = true
+        onInserted: function(obj) {
+            handlerGotExecuted = true;
+            assert.ok(obj instanceof Cookiebanner, 'onInserted handler got passed the banner instance.')
         }
     };
     var banner = new Cookiebanner(opts);
@@ -238,10 +239,11 @@ QUnit.test('Testing on-inserted handler', function(assert) {
 });
 
 QUnit.test('Testing on-closed handler', function(assert) {
-    var handlerGotExecuted = false
+    var handlerGotExecuted = false;
     var opts = {
-        onClosed: (el) => {
-          handlerGotExecuted = true
+        onClosed: function(obj) {
+            handlerGotExecuted = true;
+            assert.ok(obj instanceof Cookiebanner, 'onInserted handler got passed the banner instance.')
         }
     };
     var banner = new Cookiebanner(opts);

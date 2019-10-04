@@ -1,4 +1,3 @@
-/*global window:false, setTimeout:true, console:true */
 /*
 Copyright (C) 2013-2015 Good Code and Cookie Banner contributors
 

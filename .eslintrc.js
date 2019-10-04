@@ -5,7 +5,7 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "rules": {
-		"no-tabs": "error",
+        "no-tabs": "error",
         "no-mixed-spaces-and-tabs": "error",
         "no-irregular-whitespace": "error",
         "curly": "error",

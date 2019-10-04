@@ -1,6 +1,6 @@
-MINIFY = uglifyjs --lint -c -m toplevel=true
-LINT = jshint --show-non-errors
-ESLINT = eslint
+MINIFY = npx uglifyjs --lint -c -m toplevel=true
+LINT = npx jshint --show-non-errors
+ESLINT = npx eslint
 UPLOAD = s3cmd put -P
 
 define GetFromPkg
@@ -33,4 +33,4 @@ publish: dist/cookiebanner.min.js
 
 test:
 	$(MAKE) lint
-	phantomjs ./tests/runner.js ./tests/tests.html
+	npx phantomjs ./tests/runner.js ./tests/tests.html

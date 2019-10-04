@@ -287,6 +287,7 @@ THE SOFTWARE.
                 moreinfoDecoration: 'none',
                 moreinfoFontWeight: 'normal',
                 moreinfoFontSize: null,
+                moreinfoClass: null,
                 effect: null,
                 fontSize: '14px',
                 fontFamily: 'arial, sans-serif',
@@ -487,7 +488,12 @@ THE SOFTWARE.
 
             var closeHtml = '<div class="cookiebanner-close" style="' + this.options.closeStyle + '">' +
                 this.options.closeText + '</div>';
-            var messageHtml = '<span>' + this.options.message + (this.options.linkmsg ? ' <a>' + this.options.linkmsg + '</a>' : '') + '</span>';
+
+            var cssClass = '';
+            if (this.options.moreinfoClass !== null) {
+                cssClass = ' class="' + this.options.moreinfoClass + '" ';
+            }
+            var messageHtml = '<span>' + this.options.message + (this.options.linkmsg ? ' <a' + cssClass + '>' + this.options.linkmsg + '</a>' : '') + '</span>';
 
             if (this.options.closePrecedes) {
                 el.innerHTML = closeHtml + messageHtml;
@@ -497,7 +503,12 @@ THE SOFTWARE.
 
             this.element = el;
 
-            var el_a = el.getElementsByTagName('a')[0];
+            var el_a;
+            if (this.options.moreinfoClass !== null) {
+                el_a = el.getElementsByClassName(this.options.moreinfoClass)[0];
+            } else {
+                el_a = el.getElementsByTagName('a')[0];
+            }
             if (el_a) {
                 el_a.href = this.options.moreinfo;
                 el_a.target = this.options.moreinfoTarget;

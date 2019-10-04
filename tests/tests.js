@@ -248,6 +248,36 @@ QUnit.test('Testing on-inserted handler', function(assert) {
     assert.strictEqual(handlerGotExecuted, true, "Handler didn't execute or banner was not inserted.");
 });
 
+QUnit.test('Testing link in message is detected as the moreinfo link (backwards compatibility)', function(assert) {
+    var opts = {
+        message: '<a id="messagelink"></a>',
+        moreinfo: 'http://localhost/cookie-url'        
+    };
+    var banner = new Cookiebanner(opts);
+    banner.insert();
+    var link = window.document.getElementById('messagelink');
+    assert.notEqual(link, null);
+    assert.strictEqual(link.href, 'http://localhost/cookie-url');
+    banner.agree_and_close();
+});
+
+QUnit.test('Testing link with a provided class', function(assert) {
+    var opts = {
+        message: '<a id="messagelink"></a>',
+        moreinfo: 'http://localhost/cookie-url',
+        moreinfoClass: 'cookie-banner-class'
+    };
+    var banner = new Cookiebanner(opts);
+    banner.insert();
+    var link = window.document.getElementById('messagelink');
+    assert.notEqual(link, null);
+    assert.strictEqual(link.href, '');
+    var moreInfoLink = window.document.getElementsByClassName('cookie-banner-class')[0];
+    assert.notEqual(moreInfoLink, null);
+    assert.strictEqual(moreInfoLink.href, 'http://localhost/cookie-url');
+    banner.agree_and_close();
+});
+
 QUnit.test('Testing on-closed handler', function(assert) {
     var handlerGotExecuted = false;
     var opts = {

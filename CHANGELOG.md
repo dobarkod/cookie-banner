@@ -13,6 +13,9 @@ seconds from now"
 more details
 - New option: `padding` (default: `5px 16px`), allows setting the padding for
 cases when one has no control over the site's CSS
+- New option: `moreinfo-class` (default: `null`), allows specifying which link
+will get the `moreinfo` link (for cases when your `message` has more than one
+link, and you do not want the first one to have `moreinfo` link set on it)
 
 ### Changed
 - `data-effect="fade"` or `effect: 'fade'` now applies when the notice is closed

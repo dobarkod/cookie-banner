@@ -26,7 +26,7 @@
   "dependencies": {},
   "devDependencies": {
     "eslint": ">=4.18.2",
-    "jshint": "^2.10.2",
+    "jshint": "^2.13.6",
     "phantomjs-prebuilt": "~2.1.1",
     "uglify-js": "~2.7.4"
   }
